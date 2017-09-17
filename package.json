@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/CoreyStagner/SymptomTracker#readme",
   "dependencies": {
-    "express": "^4.15.4"
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "mysql2": "^1.4.2",
+    "sequelize": "^4.8.4",
+    "sequelize-cli": "^3.0.0-3"
   }
 }
