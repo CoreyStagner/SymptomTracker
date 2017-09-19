@@ -1,38 +1,53 @@
-console.log("Opened file [./models/doctor.js]");
+console.log("Opened file [./models/doctors.js]");
 
 module.exports = function(sequelize, DataTypes) {
-  var doctors = sequelize.define("doctor", {
-    first_name: {
-      type: DataTypes.STRING,
+  var doctors = sequelize.define("doctors", {
+    doc_id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },// end doc_uuid
+    splz_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         len: {
           args: [1,50],
-          msg: "Please enter your first name"
+          msg: "Please enter doctor's Specialty"
         }// end len
       }//end validate
-    },// end first_name
-    last_name: {
+    },// end doc_fname
+    doc_fname: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: {
           args: [1,50],
-          msg: "Please enter your last name"
+          msg: "Please enter doctors first name"
         }// end len
-      }// end validate
-    },// end last_name
-    phone_number:{
+      }//end validate
+    },// end doc_fname
+    doc_lname: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: {
-          args: 10,
-          msg: "Please enter a 10 digit phone number with no parenthesis ex. 5551234567"
+          args: [1,50],
+          msg: "Please enter doctors last name"
         }// end len
-      }// end validate
-    }// end phone_number
-  });// end define("doctor")
+      }//end validate
+    },// end doc_lname
+    doc_ph_num: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [1,10],
+          msg: "Please enter doctors phone number"
+        }// end len
+      }//end validate
+    }// end doc_fname
+  });// end define("doctors")
 
   // doctor.associate = function(models) {
   //   // Associating doctor with doctor
@@ -42,8 +57,8 @@ module.exports = function(sequelize, DataTypes) {
   // };// end doctor.associate
 
   // doctor.associate = function(models) {
-  //   // Associating doctor with specialty
-  //   doctor.hasMany(models.specialty, {
+  //   // Associating doctor with docialty
+  //   doctor.hasMany(models.docialty, {
 
   //   });// end hasMany()
   // };// end doctor.associate

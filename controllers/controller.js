@@ -14,7 +14,7 @@ module.exports = function(app){
     model.patients.findAll({}).then(function(data) {
       console.log(data);
       var hbsObject = {
-        patients: data
+        patients: data   
       };
       console.log(hbsObject);
       res.render("patients", hbsObject);
