@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "symptom_tracker_development",
+    "database": "test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

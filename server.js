@@ -9,6 +9,7 @@ var express = require ('express');
 var bodyParser = require ('body-parser');
 var db = require('./models');
 var sequelize = require("sequelize");
+var exphbs = require("express-handlebars");
 
 //===============================================================
 // Set up Express App
@@ -16,15 +17,20 @@ var sequelize = require("sequelize");
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-// Sets up the Express app to handle data parsing
+// Set up the Express app to handle data parsing
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(express.static("public"));
 
+// Set up Handlebars
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 // Routes
-require('./routes/apiRoutes.js');
+
+require('./controllers/controller.js')(app);
 
 //===============================================================
 // Syncing our sequelize models and then starting our Express app

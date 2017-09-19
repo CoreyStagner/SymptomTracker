@@ -1,7 +1,7 @@
-console.log("Opened file [./models/patient.js]");
+console.log("Opened file [./models/doctor.js]");
 
 module.exports = function(sequelize, DataTypes) {
-  var patient = sequelize.define("patient", {
+  var doctors = sequelize.define("doctor", {
     first_name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -32,21 +32,21 @@ module.exports = function(sequelize, DataTypes) {
         }// end len
       }// end validate
     }// end phone_number
-  });// end define("patient")
+  });// end define("doctor")
 
-  patient.associate = function(models) {
-    // Associating patient with doctor
-    patient.hasMany(models.doctor, {
+  // doctor.associate = function(models) {
+  //   // Associating doctor with doctor
+  //   doctor.hasMany(models.patient, {
 
-    });// end hasMany()
-  };// end patient.associate
+  //   });// end hasMany()
+  // };// end doctor.associate
 
-  patient.associate = function(models) {
-    // Associating patient with disease
-    patient.hasMany(models.disease, {
+  // doctor.associate = function(models) {
+  //   // Associating doctor with specialty
+  //   doctor.hasMany(models.specialty, {
 
-    });// end hasMany()
-  };// end patient.associate
+  //   });// end hasMany()
+  // };// end doctor.associate
   
-  return patient;
+  return doctors;
 };// end module.exports

@@ -1,7 +1,7 @@
-console.log("Opened file [./models/doctor.js]");
+console.log("Opened file [./models/patient.js]");
 
 module.exports = function(sequelize, DataTypes) {
-  var doctor = sequelize.define("doctor", {
+  var patients = sequelize.define("patients", {
     first_name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -27,26 +27,26 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       validate: {
         len: {
-          args: 10,
+          args: [10,10],
           msg: "Please enter a 10 digit phone number with no parenthesis ex. 5551234567"
         }// end len
       }// end validate
     }// end phone_number
-  });// end define("doctor")
+  });// end define("patient")
 
-  doctor.associate = function(models) {
-    // Associating doctor with doctor
-    doctor.hasMany(models.patient, {
-
-    });// end hasMany()
-  };// end doctor.associate
-
-  // doctor.associate = function(models) {
-  //   // Associating doctor with specialty
-  //   doctor.hasMany(models.specialty, {
+  // patient.associate = function(models) {
+  //   // Associating patient with doctor
+  //   patient.hasMany(models.doctor, {
 
   //   });// end hasMany()
-  // };// end doctor.associate
+  // };// end patient.associate
+
+  // patient.associate = function(models) {
+  //   // Associating patient with disease
+  //   patient.hasMany(models.disease, {
+
+  //   });// end hasMany()
+  // };// end patient.associate
   
-  return doctor;
+  return patients;
 };// end module.exports
