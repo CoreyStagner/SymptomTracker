@@ -1,7 +1,7 @@
-console.log("Opened file [./models/log_in_doctors.js]");
+console.log("Opened file [./models/log_in_user.js]");
 
 module.exports = function(sequelize, DataTypes) {
-  var log_in_doctors = sequelize.define("log_in_doctors", {
+  var log_in_user = sequelize.define("log_in_user", {
     doc_id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -27,6 +27,6 @@ module.exports = function(sequelize, DataTypes) {
         }// end len
       }// end validate
     }// end spec_desc
-  });// end define("log_in_doctors")
-  return log_in_doctors;
+  });// end define("log_in_user")
+  return log_in_user;
 };// end module.exports

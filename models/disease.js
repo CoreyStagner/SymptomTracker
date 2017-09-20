@@ -1,33 +1,33 @@
-console.log("Opened file [./models/symptoms.js]");
+console.log("Opened file [./models/doctors.js]");
 
 module.exports = function(sequelize, DataTypes) {
-  var symptoms = sequelize.define("symptoms", {
-    sym_id: {
+  var disease = sequelize.define("disease", {
+    disease_id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
-    },// end sym_id
-    sym_name: {
-      type: DataTypes.STRING,
+    },// endisease_uuid
+    disease_name: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         len: {
           args: [1,50],
-          msg: "Please enter the symptoms name"
+          msg: "Please enter name of disease"
         }// end len
       }//end validate
-    },// end sym_name
-    sym_desc: {
+    },// endisease_fname
+    disease_desc: {
       type: DataTypes.BLOB,
       allowNull: false,
       validate: {
         len: {
           args: [1,50],
-          msg: "Please enter the symptoms description"
+          msg: "Please enter a description of disease"
         }// end len
       }//end validate
-    }// end sym_desc
-  });// end define("symptoms")
+    }// endisease_fname
+  });// end define("doctors")
 
   // doctor.associate = function(models) {
   //   // Associating doctor with doctor
@@ -43,5 +43,5 @@ module.exports = function(sequelize, DataTypes) {
   //   });// end hasMany()
   // };// end doctor.associate
   
-  return symptoms;
+  return disease;
 };// end module.exports
