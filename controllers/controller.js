@@ -41,14 +41,17 @@ module.exports = function(app){
     });
   });// end app.get("/api/admin")
 
-  // app.get("/api/doctors", function(req, res) {
-  //   console.log("User went to ('/doctors')");
-  //   models.doctors.findAll({
-  //     // include: [models.doctors]
-  //   }).then(function(doctors) {
-  //     res.render("doctors", doctors);
-  //   });
-  // });// end app.get("/doctors")
+  app.get("/api/doctors/:id", function(req, res) {
+    models.patients.findAll({
+      where: {
+        doctorID: req.params.id
+      }
+    })// end findAll()
+    .then(function(patientData) {
+      res.render("doctors", {patients:patientData});
+    });// end .then()
+  });// end app.get("/api/doctors/:id")
+
 
   //====== Post Methods
   

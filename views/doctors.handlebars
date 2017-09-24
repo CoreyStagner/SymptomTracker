@@ -8,7 +8,7 @@
 					<li class="list-group-item new-item">
 						<form id="newDoctor-form" method="POST" action="/api/doctors">
                 <input class="new-item" placeholder="Please Enter Name" type="text" id="doctorName" />
-						<button id="newDoctor" type="submit">Add New Doctor</button>
+						<button id="newDoctor" type="submit">View my Patients</button>
 						</form>
 					</li>
 					<span class="doctor-container"></span>
@@ -16,9 +16,9 @@
 			</div>
 		</div>
     <div class="row">
-      <h3>Doctors</h3>
+      <h3>My Patients</h3>
       <ul>
-        {{#each doctors}}
+        {{#each patients}}
           <li>
             Name: {{this.dataValues.name}}
           </li>
@@ -26,86 +26,3 @@
       </ul>
     </div>
 	</div>
-
-	<!-- Custom Script -->
-
-	<script type="text/javascript">
-  
-  $(document).ready(function() {
-  
-    var newDoctorName = $("#doctorName");
-    var doctorList = $("tbody");
-    var doctorContainer = (".doctor-container");
-  
-  
-    $(document).on("submit", "#newDoctor-form", handleNewDoctor);
-
-    function handleNewDoctor(event){
-      event.preventDefault();
-      if(!newDoctorName.val().trim().trim()) {
-        return;
-      }// end if()
-      postNewDoctor({
-        name: newDoctorName
-          .val()
-          .trim()
-      });// end postNewDoctor()
-    }// end handleNewDoctor()
-  
-    function postNewDoctor(data) {
-      $.post("/api/doctors", data)
-        .then(getDoctors);
-    }// end postNewDoctor
-  
-    function getDoctors() {
-      $.get("/api/doctors", function(data) {
-        var rowsToAdd = [];
-        for (var i = 0; i< data.length; i++) {
-          rowsToAdd.push(createdoctorRow(data[i])); 
-        }// end if()
-        {{!-- renderdoctorList(rowsToAdd); --}}
-        newDoctorName.val("");
-      })// end .get()
-    }// end getDoctors()
-  
-    function createdoctorRow(doctorData) {
-      var newTr = $("<tr>");
-      newTr.data("doctor", doctorData);
-      newTr.append("<td>" + doctorData.name + "</td>");
-      // newTr.append("<td>" + doctorData.Symptoms.length + "</td>");
-      newTr.append("<td><a style='curser:pointer;color:red' class='delete-doctor>Delete doctor</a></td>");
-      return newTr;
-    }// end createdoctorRow()
-  
-    {{!-- function renderdoctorList(rows) {
-      doctorList.children().not(":last").remove();
-      doctorContainer.children(".alert").remove();
-      if(rows.length) {
-        console.log(rows);
-        doctorList.prepend(rows);
-      }// end if()
-      else {
-        renderEmpty();
-      }// end else()
-    }// end renderdoctorList()
-   --}}
-    function renderEmpty() {
-      var alertDiv = $("<div>");
-      alertDiv.addClass("alert alert-danger");
-      alertDiv.html("You must create a doctor first.");
-      doctorContainer.append(alertDiv);
-    }// end renderEmpty()
-  
-    // function handleDeleteButtonPress() {
-    //   var listItemData = $(this).parent("td").parent("tr").data("author");
-    //   var id = listItemData.id;
-    //   $.ajax({
-    //     method: "DELETE",
-    //     url: "/api/authors/" + id
-    //   })
-    //   .done(getAuthors);
-    // }
-  
-  })//end document.ready
-
-  </script>

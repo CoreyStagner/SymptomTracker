@@ -1,19 +1,52 @@
 $(document).ready(function() {
 
-  // var patientList = $("tbody");
-  // var patientContainer = (".patient-container");
-  
-  
+  getPatients();
+  getDoctors();
+  getSymptoms();
 
-  // // Handle Doctor Actions
-  // $(document).on("submit", "#newDoctor-form", handleNewDoctor);
-  // function handleNewDoctor(event){
-  //   console.log("ran handleNewDoctor()");
-  //   event.preventDefault();
-  //   var newDoctorName = $("#doctorName").val().trim().trim();
-  // }// end handleNewDoctor
+  // Handle Doctor Actions
+  $(document).on("submit", "#newDoctor-form", handleNewDoctor);
 
+  function handleNewDoctor(event){
+    console.log("ran handleNewDoctor()");
+    event.preventDefault();
+    var newDoctorName = $("#doctorName").val().trim();
+    if(!newDoctorName) {
+      console.log("Failed to post new Doctor");
+      return;
+    }// end if()
+    else{
+      postNewDoctor({
+        name: newDoctorName
+      });// end postNewDoctor()
+    }// end else
 
+    function postNewDoctor(data) {
+      console.log("ran postNewDoctor() with data: ", data);
+      $.post("/api/Doctors", data);
+        // .then(getDoctors);
+    }// end postNewPatient
+  }// end handleNewDoctor
+
+  function getDoctors() {
+    console.log("ran getDoctor()");
+    $.get("/api/Doctors", function(data) {
+      var rowsToAdd = [];
+      for (var i = 0; i< data.length; i++) {
+        rowsToAdd.push(createDoctorRow(data[i])); 
+      }// end if()
+      $("#DoctorName").val("");
+    });// end .get()
+  }// end getDoctors()
+
+  function createDoctorRow(doctorData) {
+    var newTr = $("<tr>");
+    newTr.data("doctor", doctorData);
+    newTr.append("<td>" + doctorData.name + "</td>");
+    // newTr.append("<td>" + doctorData.doctors.length + "</td>");
+    newTr.append("<td><a style='curser:pointer;color:red' class='delete-Doctor>Delete Doctor</a></td>");
+    return newTr;
+  }// end createDoctorRow()
 
 
 
