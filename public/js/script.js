@@ -4,24 +4,91 @@ $(document).ready(function() {
   // var patientContainer = (".patient-container");
   
   
+
+  // // Handle Doctor Actions
+  // $(document).on("submit", "#newDoctor-form", handleNewDoctor);
+  // function handleNewDoctor(event){
+  //   console.log("ran handleNewDoctor()");
+  //   event.preventDefault();
+  //   var newDoctorName = $("#doctorName").val().trim().trim();
+  // }// end handleNewDoctor
+
+
+
+
+
+
+
+
+
+
+  // Handle Symptom Actions
+  $(document).on("submit", "#newSymptom-form", handleNewSymptom);
+  function handleNewSymptom(event){
+    console.log("ran handleNewSymptom()");
+    event.preventDefault();
+    var newSymptomName = $("#symptomName").val().trim().trim();
+    if(!newSymptomName) {
+      console.log("Failed to post new Symptom");
+      return;
+    }// end if()
+    else{
+      postNewSymptom({
+        name: newSymptomName
+      });// end postNewSymptom()
+    }// end else
+
+    function postNewSymptom(data) {
+      console.log("ran postNewSymptom() with data: ", data);
+      $.post("/api/symptoms", data);
+        // .then(getSymptoms);
+    }// end postNewPatient
+  }// end handleNewSymptom
+
+  function getSymptoms() {
+    console.log("ran getSymptom()");
+    $.get("/api/symptoms", function(data) {
+      var rowsToAdd = [];
+      for (var i = 0; i< data.length; i++) {
+        rowsToAdd.push(createSymptomRow(data[i])); 
+      }// end if()
+      $("#symptomName").val("");
+    });// end .get()
+  }// end getSymptoms()
+
+  function createSymptomRow(symptomData) {
+    var newTr = $("<tr>");
+    newTr.data("symptom", symptomData);
+    newTr.append("<td>" + symptomData.name + "</td>");
+    // newTr.append("<td>" + symptomData.Symptoms.length + "</td>");
+    newTr.append("<td><a style='curser:pointer;color:red' class='delete-Symptom>Delete Symptom</a></td>");
+    return newTr;
+  }// end createSymptomRow()
+
+
+
+
+
+
+
+
+  // Handle Patient Actions
   $(document).on("submit", "#newPatient-form", handleNewPatient);
-  //
   function handleNewPatient(event){
     console.log("ran handleNewPatient()");
     event.preventDefault();
-    var newPatientName = $("#patientName").val();
+    var newPatientName = $("#patientName").val().trim().trim();
     var newPatientDocID = $("#patientDocID option:selected").attr("value");
-    console.log(newPatientName);
-      if(!newPatientName) {
-        console.log("Failed to post new Patient");
-        return;
-      }// end if()
-      else{
-        postNewPatient({
-          name: newPatientName,
-          doctorId: newPatientDocID
-        });// end postNewPatient()
-      }// end else
+    if(!newPatientName) {
+      console.log("Failed to post new Patient");
+      return;
+    }// end if()
+    else{
+      postNewPatient({
+        name: newPatientName,
+        doctorId: newPatientDocID
+      });// end postNewPatient()
+    }// end else
     }// end handleNewPatient()
   
     function postNewPatient(data) {

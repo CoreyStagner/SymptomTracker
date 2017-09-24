@@ -15,16 +15,21 @@ module.exports = function(app){
     res.render("index");
   });// end app.get("/")
 
-  app.get("/api/patients", function(req, res) {
-    console.log("User went to ('/api/patients')");
+  app.get("/api/admin", function(req, res) {
+    console.log("User went to ('/api/admin')");
     var patientData = [];
     var doctorData = [];
-    models.patients.findAll({
-      // include: [models.patients]
-    }).then(function(patients) {
+    var symptomData = [];
+    models.patients.findAll({})
+    .then(function(patients) {
       patientData = patients;
       // res.render("patients", {patients:patients});
-    });
+    });// end patients.findAll({})
+  
+    models.symptoms.findAll({})
+    .then(function(symptoms) {
+      symptomData = symptoms;
+    });// end symptoms.findAll({})
 
     models.doctors.findAll({
       order: ["name"]
@@ -32,20 +37,21 @@ module.exports = function(app){
       // console.log(doctors);
       doctorData = doctors;
       handlebars.registerPartial("docDDList", {doctors:doctorData});
-      res.render("patients", {patients: patientData, doctors: doctorData});
+      res.render("patients", {patients: patientData, doctors: doctorData, symptoms: symptomData});
     });
-  });// end app.get("/patients")
+  });// end app.get("/api/admin")
 
-  app.get("/api/doctors", function(req, res) {
-    console.log("User went to ('/doctors')");
-    models.doctors.findAll({
-      // include: [models.doctors]
-    }).then(function(doctors) {
-      res.render("doctors", doctors);
-    });
-  });// end app.get("/doctors")
+  // app.get("/api/doctors", function(req, res) {
+  //   console.log("User went to ('/doctors')");
+  //   models.doctors.findAll({
+  //     // include: [models.doctors]
+  //   }).then(function(doctors) {
+  //     res.render("doctors", doctors);
+  //   });
+  // });// end app.get("/doctors")
 
   //====== Post Methods
+  
   app.post("/api/patients", function(req,res) {
     console.log("/api/patients received a new patient post: " + req.body.name);
     models.patients.create(req.body).then(function(data){
@@ -61,5 +67,13 @@ module.exports = function(app){
     });
     // res.redirect("/api/doctors");
   });// end app.post('/api/doctors')
+
+  app.post("/api/symptoms", function(req,res) {
+    console.log("/api/symptoms received a new patient post: " + req.body.name);
+    models.symptoms.create(req.body).then(function(data){
+      res.json(data);
+    });
+    // res.redirect("/api/symptoms");
+  });// end app.post('/api/symptoms')
 
 };// end module.exports
