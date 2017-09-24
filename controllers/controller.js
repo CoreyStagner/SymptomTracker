@@ -1,45 +1,64 @@
 console.log("Opened file [./controllers/controller.js]");
 
-var express = require('express');
-var router = express.Router();
-
-var model = require('../models');
+var path = require("path");
+var models = require('../models');
+var async = require('async');
+var handlebars = require("handlebars");
 
 module.exports = function(app){
-  app.get("/", function(req, res){
+
+  //====== Get Methods
+
+  // Sets up the home page
+  app.get("/", function(req, res) {
+    console.log("User went to ('/')");
     res.render("index");
-  });// end app.get("/patients");
+  });// end app.get("/")
 
-  app.get("/patients", function(req, res){
-    model.patients.findAll({}).then(function(data) {
-      console.log(data);
-      var hbsObject = {
-        patients: data   
-      };
-      console.log(hbsObject);
-      res.render("patients", hbsObject);
-    });// end findAll.end()
-  });// end app.get("/patients");
+  app.get("/api/patients", function(req, res) {
+    console.log("User went to ('/api/patients')");
+    var patientData = [];
+    var doctorData = [];
+    models.patients.findAll({
+      // include: [models.patients]
+    }).then(function(patients) {
+      patientData = patients;
+      // res.render("patients", {patients:patients});
+    });
 
-  app.get("/doctors", function(req, res){
-    model.doctor.findAll({}).then(function(data) {
-      console.log(data);
-      var hbsObject = {
-        doctors: data
-      };
-      console.log(hbsObject);
-      res.render("doctors", hbsObject);
-    });// end findAll.end()
-  });// end app.get("/patients");
+    models.doctors.findAll({
+    }).then(function(doctors) {
+      // console.log(doctors);
+      doctorData = doctors;
+      handlebars.registerPartial("docDDList", {doctors:doctorData});
+      res.render("patients", {patients: patientData, doctors: doctorData});
+    });
+  });// end app.get("/patients")
 
-  app.get("/symptoms", function(req, res){
-    model.symptoms.findAll({}).then(function(data) {
-      console.log(data);
-      var hbsObject = {
-        symptoms: data
-      };
-      console.log(hbsObject);
-      res.render("symptoms", hbsObject);
-    });// end findAll.end()
-  });// end app.get("/patients");
-}// end module.exports
+  app.get("/api/doctors", function(req, res) {
+    console.log("User went to ('/doctors')");
+    models.doctors.findAll({
+      // include: [models.doctors]
+    }).then(function(doctors) {
+      res.render("doctors", doctors);
+    });
+  });// end app.get("/doctors")
+
+  //====== Post Methods
+  app.post("/api/patients", function(req,res) {
+    console.log("/api/patients received a new patient post: " + req.body.name);
+    models.patients.create(req.body).then(function(data){
+      res.json(data);
+    });
+    // res.redirect("/api/patients");
+  });// end app.post('/api/patients')
+
+  app.post("/api/doctors", function(req,res) {
+    console.log("/api/doctors received a new doctor post: " + req.body.name);
+    models.doctors.create(req.body).then(function(data){
+      res.json(data);
+    });
+    // res.redirect("/api/doctors");
+  });// end app.post('/api/doctors')
+
+};// end module.exports

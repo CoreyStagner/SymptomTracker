@@ -1,38 +1,4 @@
-	<div class="container">
-		<div class="row">
-      <h1>ADD A PATIENT</h1>
-    </div>
-    <div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<ul class="list-group patient-list">
-					<li class="list-group-item new-item">
-						<form id="newPatient-form" method="POST" action="/">
-                <input class="new-item" placeholder="Please Enter Name" type="text" id="patientName" />
-                {{> docDDList}}
-						<button id="newPatient" type="submit">Add New Patient</button>
-						</form>
-					</li>
-					<span class="patient-container"></span>
-				</ul>
-			</div>
-		</div>
-    <div class="row">
-      <h3>Patients</h3>
-      <ul>
-        {{#each patients}}
-          <li>
-            Name: {{this.dataValues.name}}
-          </li>
-        {{/each}}
-      </ul>
-    </div>
-	</div>
-
-	<!-- Custom Script -->
-
-	<script type="text/javascript">
-  
-  $(document).ready(function() {
+$(document).ready(function() {
   
     var newPatientName = $("#patientName");
     var patientList = $("tbody");
@@ -44,7 +10,6 @@
     function handleNewPatient(event){
       event.preventDefault();
       if(!newPatientName.val().trim().trim()) {
-
         return;
       }// end if()
       postNewPatient({
@@ -65,7 +30,7 @@
         for (var i = 0; i< data.length; i++) {
           rowsToAdd.push(createPatientRow(data[i])); 
         }// end if()
-        {{!-- renderPatientList(rowsToAdd); --}}
+        renderPatientList(rowsToAdd);
         newPatientName.val("");
       })// end .get()
     }// end getPatients()
@@ -79,7 +44,7 @@
       return newTr;
     }// end createPatientRow()
   
-    {{!-- function renderPatientList(rows) {
+    function renderPatientList(rows) {
       patientList.children().not(":last").remove();
       patientContainer.children(".alert").remove();
       if(rows.length) {
@@ -90,7 +55,7 @@
         renderEmpty();
       }// end else()
     }// end renderPatientList()
-   --}}
+  
     function renderEmpty() {
       var alertDiv = $("<div>");
       alertDiv.addClass("alert alert-danger");
@@ -109,5 +74,3 @@
     // }
   
   })//end document.ready
-
-  </script>

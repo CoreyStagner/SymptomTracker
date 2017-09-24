@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/CoreyStagner/SymptomTracker#readme",
   "dependencies": {
+    "async": "^2.5.0",
     "body-parser": "^1.18.1",
     "express": "^4.15.4",
     "express-handlebars": "^3.0.0",

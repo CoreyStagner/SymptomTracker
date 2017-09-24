@@ -35,9 +35,17 @@ module.exports = function(app){
     });// end .then()
   });// end router.get()
   
+  app.post("/api/patients", function(req, res) {
+    console.log("posted to patients");
+    // model.patients.create(req.body).then(function(data) {
+    //   res.json(data);
+    // });// end create.then()
+  });// end app.post
+
   app.post("/api/symptoms", function(req, res) {
     model.symptoms.create(req.body).then(function(data) {
       res.json(data);
     });// end create.then()
   });// end app.post
+
 };// end module.exports()

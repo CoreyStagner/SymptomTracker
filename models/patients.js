@@ -1,7 +1,7 @@
-console.log("Opened file [./models/doctors.js]");
+console.log("Opened file [./models/patients.js]");
 
 module.exports = function (sequelize, DataTypes) {
-  var doctors = sequelize.define("doctors", {
+  var patients = sequelize.define("patients", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -25,7 +25,16 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     }// end updatedAt
-  });// end define("doctors")
+  });// end define("patients")
 
-  return doctors;
+  patients.associate = function(models) {
+   patients.belongsTo(models.doctors, {
+      foreignKey: {
+        allowNull: true,
+        defaultValue: 1
+      }
+    });// end patient.belongsTo()
+  };// end patients.associate()
+
+  return patients;
 };// end module.exports

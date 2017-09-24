@@ -1,0 +1,32 @@
+{{!-- <div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Choose your Doctor
+  <span class="caret"></span></button> --}}
+
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Health Provider
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      {{#each doctors}}
+        <li>
+          {{this.dataValues.name}}
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+
+  {{!-- <ul>
+    {{#each doctors}}
+      <li>
+        Name: {{this.dataValues.name}}
+      </li>
+    {{/each}}
+  </ul> --}}
+
+  {{!-- <ul class="dropdown-menu">
+  {{#each doctors}}
+    <li>
+      <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+    </li>
+  {{/each}}
+  </ul> --}}
+</div>
