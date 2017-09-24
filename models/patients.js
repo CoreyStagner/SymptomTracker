@@ -30,8 +30,7 @@ module.exports = function (sequelize, DataTypes) {
   patients.associate = function(models) {
    patients.belongsTo(models.doctors, {
       foreignKey: {
-        allowNull: true,
-        defaultValue: 1
+        allowNull: false,
       }
     });// end patient.belongsTo()
   };// end patients.associate()

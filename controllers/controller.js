@@ -27,6 +27,7 @@ module.exports = function(app){
     });
 
     models.doctors.findAll({
+      order: ["name"]
     }).then(function(doctors) {
       // console.log(doctors);
       doctorData = doctors;
