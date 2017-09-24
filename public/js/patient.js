@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  
+
     var newPatientName = $("#patientName");
     var patientList = $("tbody");
     var patientContainer = (".patient-container");
