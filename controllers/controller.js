@@ -41,6 +41,8 @@ module.exports = function(app){
     var patientData = [];
     var doctorData = [];
     var symptomData = [];
+    var recordData = [];
+
     models.patients.findAll({})
     .then(function(patients) {
       patientData = patients;
@@ -63,14 +65,32 @@ module.exports = function(app){
   });// end app.get("/api/admin")
 
   app.get("/api/doctors/:id", function(req, res) {
-    models.patients.findAll({
 
+    var recordData = [];
+    // var patientsArray = [];
+    // var patientsObject = {};
+
+    models.health_records.findAll({
+      include: [models.symptoms]
+    })
+    .then(function(records){
+      recordData = records;
+      console.log("recordData: ", recordData);
+    });// end health_records.findAll({})
+
+    models.patients.findAll({
       where: {
         doctorID: req.params.id
       }
     })// end findAll()
     .then(function(patientData) {
-      res.render("doctors", {patients:patientData});
+
+      // var object = {
+      //   patient: ,
+      //   record:
+      // }
+
+      res.render("doctors", {patients:patientData,  records:recordData});
     });// end .then()
   });// end app.get("/api/doctors/:id")
 
@@ -83,11 +103,12 @@ module.exports = function(app){
     models.health_records.findAll({
       where: {
         patientId: patID
-      }
+      },
+      include: [models.symptoms]
     })// end findAll()
     .then(function(records) {
       recordData = records;
-      console.log("Record Data: ", recordData);
+      console.log("Record Data: ", recordData[0].dataValues.symptom.dataValues.name);
     });// end .then()
 
     models.patients.findAll({
@@ -136,10 +157,19 @@ module.exports = function(app){
   });// end app.post('/api/symptoms')
 
   app.post("/api/health_records", function(req,res) {
-    console.log("/api/health_records received a new patient post: " + req.body.name);
+    console.log("/api/health_records received a new patient post: ", req.body);
     models.health_records.create(req.body).then(function(data){
       res.json(data);
     });
     // res.redirect("/api/health_records");
   });// end app.post('/api/health_records')
 };// end module.exports
+
+
+
+
+
+
+// SANDBOX 
+// study
+// array methods filter, map, reduce

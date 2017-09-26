@@ -19,7 +19,9 @@ module.exports = function (sequelize, DataTypes) {
 
   health_records.associate = function (models) {
     health_records.belongsTo(models.patients, {
-    });// end health_records.hasMany()
+    });// end health_records.belongsTo('patients')
+    health_records.belongsTo(models.symptoms,{
+    });// end health_records.hasMany('symptoms')
   };// end health_records.associate()
 
   return health_records;

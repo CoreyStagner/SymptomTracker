@@ -176,7 +176,7 @@ $(document).ready(function() {
     }// end if()
     else{
       postNewRecord({
-        symId: recordSymID,
+        symptomId: recordSymID,
         patientId: recordPatientID
       });// end postNewRecord()
     }// end else
