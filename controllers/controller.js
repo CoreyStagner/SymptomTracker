@@ -15,6 +15,27 @@ module.exports = function(app){
     res.render("index");
   });// end app.get("/")
 
+  app.get("/api/doctors", function(req, res){
+    models.doctors.findAll({
+      order: ["name"]
+    });//end app.get("/api/doctors")
+  });
+
+  app.get("/api/patients", function(req, res){
+    models.patients.findAll({
+    });//end app.get("/api/patients")
+  });
+
+  app.get("/api/symptoms", function(req, res){
+    models.symptoms.findAll({
+    });//end app.get("/api/symptoms")
+  });
+
+  app.get("/api/health_records", function(req, res){
+    models.health_records.findAll({
+    });//end app.get("/api/health_records")
+  });
+
   app.get("/api/admin", function(req, res) {
     console.log("User went to ('/api/admin')");
     var patientData = [];
@@ -37,12 +58,13 @@ module.exports = function(app){
       // console.log(doctors);
       doctorData = doctors;
       handlebars.registerPartial("docDDList", {doctors:doctorData});
-      res.render("patients", {patients: patientData, doctors: doctorData, symptoms: symptomData});
+      res.render("admin", {patients: patientData, doctors: doctorData, symptoms: symptomData});
     });
   });// end app.get("/api/admin")
 
   app.get("/api/doctors/:id", function(req, res) {
     models.patients.findAll({
+
       where: {
         doctorID: req.params.id
       }
@@ -52,6 +74,40 @@ module.exports = function(app){
     });// end .then()
   });// end app.get("/api/doctors/:id")
 
+  app.get("/api/patients/:id", function(req, res) {
+    var patientData = [];
+    var recordData = [];
+    var symptomData = [];
+    var patID = req.params.id;
+
+    models.health_records.findAll({
+      where: {
+        patientId: patID
+      }
+    })// end findAll()
+    .then(function(records) {
+      recordData = records;
+      console.log("Record Data: ", recordData);
+    });// end .then()
+
+    models.patients.findAll({
+      where: {
+        id: req.params.id
+      }
+    })// end findAll()
+    .then(function(patients) {
+      patientData = patients;
+      // console.log("patient Data: ", patientData);
+    });// end .then()
+
+    models.symptoms.findAll({
+    })// end symptoms.findAll({})
+    .then(function(symptomData) {
+      // symptomData = symptoms;
+      handlebars.registerPartial("symDDList", {symptoms:symptomData});
+      res.render("patients", {symptoms:symptomData, patients:patientData, records:recordData});
+    });// end .then()
+  });// end app.get("/api/doctors/:id")
 
   //====== Post Methods
   
@@ -79,4 +135,11 @@ module.exports = function(app){
     // res.redirect("/api/symptoms");
   });// end app.post('/api/symptoms')
 
+  app.post("/api/health_records", function(req,res) {
+    console.log("/api/health_records received a new patient post: " + req.body.name);
+    models.health_records.create(req.body).then(function(data){
+      res.json(data);
+    });
+    // res.redirect("/api/health_records");
+  });// end app.post('/api/health_records')
 };// end module.exports

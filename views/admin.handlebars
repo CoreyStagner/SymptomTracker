@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="row">
+    <h1>ADD A PATIENT</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <ul class="list-group patient-list">
+        <li class="list-group-item new-item">
+          <form id="newPatient-form" method="POST" action="/">
+              <input class="new-item" placeholder="Please Enter Name" type="text" id="patientName" />
+              {{> docDDList}}
+          <button id="newPatient" type="submit">Add New Patient</button>
+          </form>
+        </li>
+        <span class="patient-container"></span>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <h3>Patients</h3>
+      <ul>
+        {{#each patients}}
+          <li>
+            <a href="/api/patients/{{this.id}}"><button>Record a symptom</button></a> {{this.dataValues.name}}
+          </li>
+        {{/each}}
+      </ul>
+    </div> 
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <h1>ADD A SYMPTOM</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <ul class="list-group Symptom-list">
+        <li class="list-group-item new-item">
+          <form id="newSymptom-form" method="POST" action="/">
+              <input class="new-item" placeholder="Please Enter Name" type="text" id="symptomName" />
+          <button id="newSymptom" type="submit">Add New Symptom</button>
+          </form>
+        </li>
+        <span class="Symptom-container"></span>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <h3>Symptoms</h3>
+      <ul>
+        {{#each symptoms}}
+          <li>
+            Name: {{this.dataValues.name}}
+          </li>
+        {{/each}}
+      </ul>
+    </div> 
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <h1>ADD A DOCTOR</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <ul class="list-group doctor-list">
+        <li class="list-group-item new-item">
+          <form id="newDoctor-form" method="POST" action="/">
+              <input class="new-item" placeholder="Please Enter Name" type="text" id="doctorName" />
+          <button id="newDoctor" type="submit">Add New Doctor</button>
+          </form>
+        </li>
+        <span class="doctor-container"></span>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <h3>Doctors</h3>
+      <ul>
+        {{#each doctors}}
+          <li>
+            <a href="/api/doctors/{{this.id}}"><button>View Patients</button></a> {{this.dataValues.name}}
+          </li>
+        {{/each}}
+      </ul>
+    </div> 
+  </div>
+</div>

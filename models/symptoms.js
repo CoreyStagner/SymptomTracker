@@ -29,14 +29,12 @@ module.exports = function (sequelize, DataTypes) {
     }// end updatedAt
   });// end define("symptoms")
 
+    
 
-  // symptoms.associate = function(models) {
-  //   symptoms.belongsTo(models.health_records, {
-  //      foreignKey: {
-  //        allowNull: true
-  //      }
-  //    });// end patient.belongsTo()
-  //  };// end patients.associate()
+  symptoms.associate = function(models) {
+    symptoms.hasMany(models.health_records, {
+     });// end patient.belongsTo()
+   };// end patients.associate()
 
 
   return symptoms;

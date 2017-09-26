@@ -3,6 +3,7 @@ $(document).ready(function() {
   getPatients();
   getDoctors();
   getSymptoms();
+  getRecords();
 
   // Handle Doctor Actions
   $(document).on("submit", "#newDoctor-form", handleNewDoctor);
@@ -30,7 +31,7 @@ $(document).ready(function() {
 
   function getDoctors() {
     console.log("ran getDoctor()");
-    $.get("/api/Doctors", function(data) {
+    $.get("/api/doctors", function(data) {
       var rowsToAdd = [];
       for (var i = 0; i< data.length; i++) {
         rowsToAdd.push(createDoctorRow(data[i])); 
@@ -156,4 +157,55 @@ $(document).ready(function() {
       alertDiv.html("You must create a patient first.");
       patientContainer.append(alertDiv);
     }// end renderEmpty()
+
+
+
+
+  // Handle Health Record Actions
+  $(document).on("submit", "#newRecord-form", handleNewRecord);
+  function handleNewRecord(event){
+    console.log("ran handleNewRecord()");
+    event.preventDefault();
+    // var newRecordName = $("#recordName").val().trim().trim();
+    var recordPatientID = $("#patientID").attr("value");
+    console.log(recordPatientID);
+    var recordSymID = $("#patientSymID option:selected").attr("value");
+    if(!recordSymID) {
+      console.log("Failed to post new Record");
+      return;
+    }// end if()
+    else{
+      postNewRecord({
+        symId: recordSymID,
+        patientId: recordPatientID
+      });// end postNewRecord()
+    }// end else
+    }// end handleNewRecord()
+  
+    function postNewRecord(data) {
+      console.log("ran postNewRecord() with data: ", data);
+      $.post("/api/health_records", data)
+        .then(getRecords);
+    }// end postNewRecord
+  
+    function getRecords() {
+      console.log("ran getRecord()");
+      $.get("/api/health_records", function(data) {
+        var rowsToAdd = [];
+        for (var i = 0; i< data.length; i++) {
+          rowsToAdd.push(createRecordRow(data[i])); 
+        }// end if()
+        $("#recordName").val("");
+      });// end .get()
+    }// end getRecords()
+  
+    function createRecordRow(RecordData) {
+      var newTr = $("<tr>");
+      newTr.data("record", RecordData);
+      newTr.append("<td>" + RecordData.name + "</td>");
+      // newTr.append("<td>" + RecordData.Symptoms.length + "</td>");
+      newTr.append("<td><a style='curser:pointer;color:red' class='delete-record>Delete Record</a></td>");
+      return newTr;
+    }// end createRecordRow()
+
   });//end document.ready
