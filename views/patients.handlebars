@@ -1,33 +1,116 @@
-	<div class="container">
-		<div class="row">
+  <div class="container2">
+    <div class="card text-center">
+      <div class="card-header">
+        	<div class="row">
       {{#each patients}}
         <h1>Welcome {{this.dataValues.name}}.</h1>
         <div id="patientID" value="{{this.dataValues.id}}"></div>
       {{/each}}
     </div>
-    <div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<ul class="list-group doctor-list">
-					<li class="list-group-item new-item">
-						<form id="newRecord-form" method="POST" action="/api/health_record">
-                {{> symDDList}}
-						<button id="newRecord" type="submit">Add a new symptom</button>
-						</form>
-					</li>
-					<span class="doctor-container"></span>
-				</ul>
-			</div>
-		</div>
-    <div class="row">
-      <h3>My Symptom Record</h3>
-      <ul>
-        {{#each records}}
-          <li>
-            Name: {{this.dataValues.symptom.dataValues.name}}
-            <br>
-            Date: {{this.dataValues.createdAt}}
-          </li>
-        {{/each}}
-      </ul>
+      </div>
+    
+    <div class="card-body">
+  
+      <div id="demo" class="yui3-skin-sam"> <!-- You need this skin class -->
+
+        <div id="leftcolumn">
+        <!-- Container for the calendar -->
+          <div id="mycalendar"></div>
+            <div id="links" style="padding-left:20px;">
+              <!-- The buttons are created simply by assigning the correct CSS class -->
+              <button id="togglePrevMonth" class="yui3-button">Toggle Previous Month's Dates</button><br>
+              <button id="toggleNextMonth" class="yui3-button">Toggle Next Month's Dates</button><br>
+              Selected date: <span id="selecteddate"></span>
+            </div>
+          </div>
+  
+<div id="rightcolumn">
+  <form>
+    <div class="form-group">
+      <label for="exampleFormControlSelect2">Example multiple select</label>
+      {{> symDDList}}
     </div>
-	</div>
+    </form>
+
+    <ul>
+      {{#each records}}
+        <li>
+          Name: {{this.dataValues.symptom.dataValues.name}}
+          <br>
+          Date: {{this.dataValues.createdAt}}
+        </li>
+      {{/each}}
+    </ul>
+</div>
+</div>
+  
+  <!-- Symptom form -->
+
+
+
+
+
+<script type="text/javascript">
+YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
+
+    // Create a new instance of calendar, placing it in
+    // #mycalendar container, setting its width to 340px,
+    // the flags for showing previous and next month's
+    // dates in available empty cells to true, and setting
+    // the date to today's date.
+    var calendar = new Y.Calendar({
+      contentBox: "#mycalendar",
+      width:'340px',
+      showPrevMonth: true,
+      showNextMonth: true,
+      date: new Date()}).render();
+
+    // Get a reference to Y.DataType.Date
+    var dtdate = Y.DataType.Date;
+
+    // Listen to calendar's selectionChange event.
+    calendar.on("selectionChange", function (ev) {
+
+      // Get the date from the list of selected
+      // dates returned with the event (since only
+      // single selection is enabled by default,
+      // we expect there to be only one date)
+      var newDate = ev.newSelection[0];
+
+      // Format the date and output it to a DOM
+      // element.
+      Y.one("#selecteddate").setHTML(dtdate.format(newDate));
+    });
+
+
+    // When the 'Show Previous Month' link is clicked,
+    // modify the showPrevMonth property to show or hide
+    // previous month's dates
+    Y.one("#togglePrevMonth").on('click', function (ev) {
+      ev.preventDefault();
+      calendar.set('showPrevMonth', !(calendar.get("showPrevMonth")));
+    });
+
+    // When the 'Show Next Month' link is clicked,
+    // modify the showNextMonth property to show or hide
+    // next month's dates
+    Y.one("#toggleNextMonth").on('click', function (ev) {
+      ev.preventDefault();
+      calendar.set('showNextMonth', !(calendar.get("showNextMonth")));
+    });
+});
+</script>
+
+    </div>
+    <!--Copyright-->
+    <div class="card-footer">
+            © 2017 Copyright: <a href="https://www.MDBootstrap.com"> Project 2 </a>
+    </div>
+    </div>
+
+
+</body>
+</html>
+
+
+
