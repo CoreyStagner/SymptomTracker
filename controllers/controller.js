@@ -9,6 +9,10 @@ module.exports = function(app){
 
   //====== Get Methods
 
+  app.get("/calendar", function(req, res) {
+    res.render("calendar")
+  });
+
   // Sets up the home page
   app.get("/", function(req, res) {
     console.log("User went to ('/')");

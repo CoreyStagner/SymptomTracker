@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8">
-        <title>Calendar</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <script src="http://yui.yahooapis.com/3.10.3/build/yui/yui-min.js"></script>
-</head>
 
-<body>
 
   <div class="container2">
     <div class="card text-center">
@@ -24,7 +14,7 @@
         <div id="leftcolumn">
         <!-- Container for the calendar -->
           <div id="mycalendar"></div>
-            <div id="links" style="padding-left:20px;">
+            <div id="links">
               <!-- The buttons are created simply by assigning the correct CSS class -->
               <button id="togglePrevMonth" class="yui3-button">Toggle Previous Month's Dates</button><br>
               <button id="toggleNextMonth" class="yui3-button">Toggle Next Month's Dates</button><br>
@@ -131,6 +121,4 @@ YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
     </div>
 
 
-</body>
-</html>
 

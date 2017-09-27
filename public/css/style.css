@@ -10,6 +10,7 @@ h1 {
 body {
     width:800;
     margin:auto;
+    font-family: myFirstFont;
     background-image: url("../images/medical-background-97.jpg");
 }
 
@@ -35,7 +36,6 @@ body {
 }
 
 .form-control {
-    width: 80%;
     align-content: center;
 }
 
@@ -55,6 +55,7 @@ body {
 }
 
 .container2 {
+    width: 90%;
     margin: auto;
     border-style: solid;
     border-color: white;
@@ -62,6 +63,8 @@ body {
     margin-bottom: 25px;
     margin-top: 25px;
 }
+
+
 
 @media screen and (max-width: 576px) { 
         .jumbotron {
@@ -105,4 +108,5 @@ body {
 
 #mycalendar {
     width: 487.5px;
+    margin-left: 50px;
 }
