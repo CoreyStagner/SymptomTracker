@@ -1,47 +1,41 @@
 console.log("Opened file [./models/symptoms.js]");
 
-module.exports = function(sequelize, DataTypes) {
+var models = require('../models');
+
+module.exports = function (sequelize, DataTypes) {
   var symptoms = sequelize.define("symptoms", {
-    sym_id: {
+    id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
-    },// end sym_id
-    sym_name: {
+    },// end id
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: {
-          args: [1,50],
-          msg: "Please enter the symptoms name"
+          args: [1, 50],
+          msg: "Please enter a symptom"
         }// end len
       }//end validate
-    },// end sym_name
-    sym_desc: {
-      type: DataTypes.BLOB,
-      allowNull: false,
-      validate: {
-        len: {
-          args: [1,50],
-          msg: "Please enter the symptoms description"
-        }// end len
-      }//end validate
-    }// end sym_desc
+    },// end name
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },// end createdAt
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: true
+    }// end updatedAt
   });// end define("symptoms")
 
-  // doctor.associate = function(models) {
-  //   // Associating doctor with doctor
-  //   doctor.hasMany(models.patient, {
+    
 
-  //   });// end hasMany()
-  // };// end doctor.associate
+  symptoms.associate = function(models) {
+    symptoms.hasMany(models.health_records, {
+     });// end patient.belongsTo()
+   };// end patients.associate()
 
-  // doctor.associate = function(models) {
-  //   // Associating doctor with docialty
-  //   doctor.hasMany(models.docialty, {
 
-  //   });// end hasMany()
-  // };// end doctor.associate
-  
   return symptoms;
 };// end module.exports

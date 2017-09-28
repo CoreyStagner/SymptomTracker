@@ -1,0 +1,5 @@
+<select id="patientSymID">
+  {{#each symptoms}}
+      <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+  {{/each}}
+</select>

@@ -1,0 +1,101 @@
+/* @font-face {
+    font-family: myFirstFont;
+    src: url(HappyTime.otf);
+} */
+
+h1 {
+    font-size: 50px;
+}
+
+body {
+    width:800;
+    margin:auto;
+    font-family: myFirstFont;
+    background-image: url("../images/medical-background-97.jpg");
+}
+
+.container {
+    width: 960px;
+}
+
+.jumbotron {
+    background-image: url("../images/header1.jpg");
+    font-family: myFirstFont;
+    height: 275px;
+    margin-top: 25px;
+    border-style: solid;
+    border-color: white;
+    border-width: 10px;
+    color: #99a;
+}
+
+.card-footer {
+    text-align: center;
+    background-color: #6df;
+    color: white;
+}
+
+.form-control {
+    align-content: center;
+}
+
+.card-header {
+    background-color: #6df;
+    color: white;
+}
+
+.container1 {
+    width: 50%;
+    margin: auto;
+    border-style: solid;
+    border-color: white;
+    border-width: 10px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.container2 {
+    width: 90%;
+    margin: auto;
+    border-style: solid;
+    border-color: white;
+    border-width: 10px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+
+
+@media screen and (max-width: 576px) { 
+        .jumbotron {
+            display: none;
+        }
+     }
+
+/*Medium devices (tablets, 768px and up)*/
+@media screen and (min-width: 768px) {
+     .tablets-only {
+       display:none !important;
+    }
+}
+
+/* Large devices (laptops, 992px and up)*/
+@media screen and (max-width: 992px) { 
+
+     .jumbotron {
+       background-image: url(null)
+    }
+}
+
+#leftcolumn {
+    width: 50%;
+    margin: 0px;
+    float: left;
+}
+
+#rightcolumn {
+    width: 50%;
+    margin: 0px;
+    float: right;
+    padding-left: 50px;
+}

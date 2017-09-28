@@ -2,9 +2,7 @@ console.log("Opened file [./routes/htmlRoutes.js]");
 
 var express = require('express');
 var router = express.Router();
-
 var path = require('path');
-
 var model = require('../models');
 
 module.exports = function(app){
@@ -17,11 +15,6 @@ module.exports = function(app){
       console.log(hbsObject);
       res.render("index", hbsObject);
     });
-
-
-
-
-
 
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });// end app.get()
