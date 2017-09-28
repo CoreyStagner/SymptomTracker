@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="jumbotron">
+        <h1>Symptom Tracker</h1>
+        <h2>Sign Up</h2>
+    </div>
+</div>
+
+    <div class="container1">
+        <div class="card text-center">
+            <div class="card-header">
+                <h4 class="card-title">Patient Sign Up</h4>
+            </div>
+    <div class="card-body">
+        <form id="userSignup" >
+            {{!-- action="/userSignup" method="post"> --}}
+            
+            <div class="form-group">
+                <label for="userName">Create Username</label>
+                <input name="username" type="ID" class="input-block-level" id="userName" aria-describedby="ID Help" placeholder="Enter a Username">
+                <small id="IDHelp" class="form-text text-muted">We'll never share your ID with anyone else.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="userPassword">Create Password</label>
+                <input name="password" type="password" class="input-block-level" id="userPassword" placeholder="Password">
+            </div>
+
+            <div class="form-group">
+                <label for="userPasswordVerify">Verify Password</label>
+                <input name="password" type="password" class="input-block-level" id="userPasswordVerify" placeholder="Password">
+            </div>
+
+            <div class="form-group">
+                <label>Choose your doctor</label>
+                {{> docDDList}}
+            </div>
+
+            <div>
+                <input class="btn btn-primary" type="submit" value="Create Account" />
+            </div>
+
+        </form>
+    </div>
+<!--Copyright-->
+<div class="card-footer">
+        © 2017 Copyright: <a href="https://www.MDBootstrap.com"> Project 2 </a>
+</div>
+</div>
+

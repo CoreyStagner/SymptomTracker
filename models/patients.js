@@ -17,6 +17,25 @@ module.exports = function (sequelize, DataTypes) {
         }// end len
       }//end validate
     },// end name
+    pass: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [1, 50],
+          msg: "Please enter your password"
+        }// end len
+      }//end validate
+    },// end pass
+    salt: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [1, 50],
+        }// end len
+      }//end validate
+    },// end salt
     createdAt: {
       type: DataTypes.DATE,
       allowNull: true

@@ -20,23 +20,23 @@
     <ul>
       {{#each patients}}
         <li>
-          Name: {{this.dataValues.name}}
+          <a href="/api/patients/{{this.id}}"><button>View: </button></a> {{this.dataValues.name}}
         </li>
-
-        
       {{/each}}
 
-        {{!-- <ul>
-          {{#each records}}
-            <li>
-              Name: {{this.dataValues.symptom.dataValues.name}}
-              <br>
-              Date: {{this.dataValues.createdAt}}
-            </li>
-          {{/each}}
-        </ul> --}}
-        
+      {{!-- Insert helper function here
+            <ul>
+              {{#each records}}
+                <li>
+                  Name: {{this.dataValues.symptom.dataValues.name}}
+                  <br>
+                  Date: {{this.dataValues.createdAt}}
+                </li>
+              {{/each}}
+            </ul>
+      --}}
 
+  
     </ul>
   </div>
 </div>  

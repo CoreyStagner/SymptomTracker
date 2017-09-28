@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
-  getPatients();
-  getDoctors();
-  getSymptoms();
-  getRecords();
+  // getPatients();
+  // getDoctors();
+  // getSymptoms();
+  // getRecords();
 
   // Handle Doctor Actions
   $(document).on("submit", "#newDoctor-form", handleNewDoctor);
@@ -208,4 +208,80 @@ $(document).ready(function() {
       return newTr;
     }// end createRecordRow()
 
-  });//end document.ready
+
+
+
+
+
+    
+
+  $(document).on("submit", "#userSignup", handleNewUser);
+  
+  function handleNewUser(event){
+    console.log("ran handleNewUser()");
+    event.preventDefault();
+    var userName = $("#userName").val();
+    var userPassword = $("#userPassword").val();
+    var userPasswordVerify = $("#userPasswordVerify").val();
+    var userDocID = $("#userDocID option:selected").attr("value");
+
+    if(!userName || !userPassword || !userPasswordVerify || !userDocID) {
+        alert("Please fill all fields!");
+        return;
+    } else {
+        // alert("Got Data: " + userName + "   " + userPassword + "   " + userPasswordVerify + "   " + userDocID);
+        if(userPassword !== userPasswordVerify){
+          alert("Passwords do not match please use the same password!");
+        } else {
+            // function postNewPatient(data) {
+            //   console.log("ran postNewPatient() with data: ", data);
+            //   $.post("/api/patients", data)
+            //     .then(getPatients);
+            // }// end postNewPatient
+          postNewPatient({
+            name: userName,
+            pass: userPassword,
+            doctorId: userDocID,
+            salt: "54d6f7g8h9j0k9j8h7gf6"
+          });// end postNewPatient()
+        }// end if/else()
+    }// end if/else()
+  }// end handleNewUser
+  
+
+
+
+  function postLogin(data) {
+    console.log("posted login with: ", data);
+    $.post("/userLogin", data)
+  }// end postNewPatient
+
+
+
+  $(document).on("submit", "#userLogin", handleLogin);
+  
+  function handleLogin(event){
+    console.log("ran handleNewUser()");
+    event.preventDefault();
+    var userName = $("#userName").val();
+    var userPassword = $("#userPassword").val();
+    var salt = "54d6f7g8h9j0k9j8h7gf6";
+
+    if(!userName || !userPassword) {
+        alert("Please fill all fields!");
+        return;
+    } else {
+        // alert("Got Data: " + userName + "   " + userPassword);
+        
+          postLogin({
+            name: userName,
+            pass: userPassword,
+            salt: "54d6f7g8h9j0k9j8h7gf6"
+          });// end postNewPatient()
+        }// end if/else()
+  };// end handleNewUser
+
+
+
+
+});//end document.ready

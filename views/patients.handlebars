@@ -25,12 +25,13 @@
           </div>
   
 <div id="rightcolumn">
-  <form>
+  <form id="newRecord-form">
     <div class="form-group">
-      <label for="exampleFormControlSelect2">Example multiple select</label>
+      <label for="exampleFormControlSelect2">Report a new symptom</label>
       {{> symDDList}}
     </div>
-    </form>
+    <button id="newRecord" type="submit">Report</button>
+  </form>
 
     <ul>
       {{#each records}}
