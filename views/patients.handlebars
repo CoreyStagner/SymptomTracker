@@ -1,4 +1,4 @@
-	<div class="container2">
+	<div class="container1">
     <div class="card text-center">
 		  <div class="card-header">
           {{#each patients}}
@@ -8,9 +8,8 @@
                 {{/each}}
               </d iv>
     <div class="row">
-			<div class="col-md-6 col-md-offset-3">
 				<ul class="list-group doctor-list">
-					<li class="list-group-item new-item">
+					<li class="list-group-item new-item" style="margin-left: 195px; margin-top: 20px; margin-bottom: 20px;">
 						<form id="newRecord-form" method="POST" action="/api/health_record">
                 {{> symDDList}}
 						<button id="newRecord" type="submit">Add a new symptom</button>
@@ -19,19 +18,16 @@
 					<span class="doctor-container"></span>
 				</ul>
 			</div>
-	
- 
-    <div class="row">
-      <h3>My Symptom Record</h3>
-      <ul>
-        {{#each records}}
-          <li>
-            Name: {{this.dataValues.symptom.dataValues.name}}
-            <br>
-            Date: {{this.dataValues.createdAt}}
-          </li>
-        {{/each}}
-      </ul>
-    </div>
+        <h3>My Symptom Record</h3>
+          <ul style="list-style: none;">
+            {{#each records}}
+              <li>
+                Symptom: {{this.dataValues.symptom.dataValues.name}}
+              <br>
+                Date: {{this.dataValues.createdAt}}
+              </li>
+              {{/each}}
+          </ul>
+      </div>
 	</div>
 </div>
