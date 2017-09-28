@@ -8,10 +8,14 @@ h1 {
 }
 
 body {
+    height: 100%;
+    margin: 0;
     width:800;
-    margin:auto;
     font-family: myFirstFont;
-    background-image: url("../images/medical-background-97.jpg");
+    background-image: url("../images/background_main.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .container {
