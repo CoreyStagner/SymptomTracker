@@ -1,10 +1,12 @@
-	<div class="container">
-		<div class="row">
-      {{#each patients}}
-        <h1>Welcome {{this.dataValues.name}}.</h1>
-        <div id="patientID" value="{{this.dataValues.id}}"></div>
-      {{/each}}
-    </div>
+	<div class="container2">
+    <div class="card text-center">
+		  <div class="card-header">
+          {{#each patients}}
+            <h1 class="card-title">Welcome {{this.dataValues.name}}</h1>
+        </div>
+              <div id="patientID" value="{{this.dataValues.id}}"></div>
+                {{/each}}
+              </d iv>
     <div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<ul class="list-group doctor-list">
@@ -17,7 +19,8 @@
 					<span class="doctor-container"></span>
 				</ul>
 			</div>
-		</div>
+	
+ 
     <div class="row">
       <h3>My Symptom Record</h3>
       <ul>
@@ -31,3 +34,4 @@
       </ul>
     </div>
 	</div>
+</div>
