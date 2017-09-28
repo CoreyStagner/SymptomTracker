@@ -87,12 +87,6 @@ body {
     }
 }
 
-.yui3-button {
-    margin:10px 0px 10px 0px;
-    color: #fff;
-    background-color: #3476b7;
-}
-
 #leftcolumn {
     width: 50%;
     margin: 0px;
@@ -106,7 +100,3 @@ body {
     padding-left: 50px;
 }
 
-#mycalendar {
-    width: 487.5px;
-    margin-left: 50px;
-}
