@@ -25,8 +25,10 @@ $(document).ready(function() {
 
     function postNewDoctor(data) {
       console.log("ran postNewDoctor() with data: ", data);
-      $.post("/api/Doctors", data);
-        // .then(getDoctors);
+      $.post("/api/doctors", data)
+        .then(function(){
+          window.location.reload();
+        });// end .then()
     }// end postNewPatient
   }// end handleNewDoctor
 
@@ -37,7 +39,7 @@ $(document).ready(function() {
       for (var i = 0; i< data.length; i++) {
         rowsToAdd.push(createDoctorRow(data[i])); 
       }// end if()
-      $("#DoctorName").val("");
+      $("#doctorName").val("");
     });// end .get()
   }// end getDoctors()
 
@@ -75,8 +77,10 @@ $(document).ready(function() {
 
     function postNewSymptom(data) {
       console.log("ran postNewSymptom() with data: ", data);
-      $.post("/api/symptoms", data);
-        // .then(getSymptoms);
+      $.post("/api/symptoms", data)
+        .then(function(){
+          window.location.reload();
+        });// end .then()
     }// end postNewPatient
   }// end handleNewSymptom
 
@@ -129,7 +133,9 @@ $(document).ready(function() {
     function postNewPatient(data) {
       console.log("ran postNewPatient() with data: ", data);
       $.post("/api/patients", data)
-        .then(getPatients);
+        .then(function(){
+          window.location.reload();
+        });// end .then()
     }// end postNewPatient
   
     function getPatients() {
@@ -186,7 +192,9 @@ $(document).ready(function() {
     function postNewRecord(data) {
       console.log("ran postNewRecord() with data: ", data);
       $.post("/api/health_records", data)
-        .then(getRecords);
+        .then(function(){
+          window.location.reload();
+        });// end .then()
     }// end postNewRecord
   
     function getRecords() {
@@ -233,12 +241,8 @@ $(document).ready(function() {
         // alert("Got Data: " + userName + "   " + userPassword + "   " + userPasswordVerify + "   " + userDocID);
         if(userPassword !== userPasswordVerify){
           alert("Passwords do not match please use the same password!");
+          return;
         } else {
-            // function postNewPatient(data) {
-            //   console.log("ran postNewPatient() with data: ", data);
-            //   $.post("/api/patients", data)
-            //     .then(getPatients);
-            // }// end postNewPatient
           postNewPatient({
             name: userName,
             pass: userPassword,
@@ -255,6 +259,9 @@ $(document).ready(function() {
   function postLogin(data) {
     console.log("posted login with: ", data);
     $.post("/userLogin", data)
+      .then(function(){
+        window.location.reload();
+      });// end .then()
   }// end postNewPatient
 
 

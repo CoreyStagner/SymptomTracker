@@ -10,6 +10,7 @@ h1 {
 body {
     width:800;
     margin:auto;
+    font-family: myFirstFont;
     background-image: url("../images/medical-background-97.jpg");
 }
 
@@ -35,7 +36,6 @@ body {
 }
 
 .form-control {
-    width: 80%;
     align-content: center;
 }
 
@@ -55,6 +55,7 @@ body {
 }
 
 .container2 {
+    width: 90%;
     margin: auto;
     border-style: solid;
     border-color: white;
@@ -63,9 +64,7 @@ body {
     margin-top: 25px;
 }
 
-.blank-spacer{
-    height: 10px;
-}
+
 
 @media screen and (max-width: 576px) { 
         .jumbotron {
@@ -88,12 +87,6 @@ body {
     }
 }
 
-.yui3-button {
-    margin:10px 0px 10px 0px;
-    color: #fff;
-    background-color: #3476b7;
-}
-
 #leftcolumn {
     width: 50%;
     margin: 0px;
@@ -105,8 +98,4 @@ body {
     margin: 0px;
     float: right;
     padding-left: 50px;
-}
-
-#mycalendar {
-    width: 487.5px;
 }

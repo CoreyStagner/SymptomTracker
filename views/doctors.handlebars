@@ -1,42 +1,25 @@
-<div class="container">
-  <div class="row">
-    <h1>Welcome Doctor</h1>
-  </div>
-  {{!-- <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <ul class="list-group doctor-list">
-        <li class="list-group-item new-item">
-          <form id="newDoctor-form" method="POST" action="/api/doctors">
-              <input class="new-item" placeholder="Please Enter Name" type="text" id="doctorName" />
-          <button id="newDoctor" type="submit">View my Patients</button>
-          </form>
-        </li>
-        <span class="doctor-container"></span>
-      </ul>
+{{!-- Jeff layout --}}
+
+<div class="container2">
+  <div class="card text-center">
+    <div class="card-header">
+      <h2 class="card-title">Welcome Doctor</h2>
     </div>
-  </div> --}}
-  <div class="row">
-    <h3>My Patients</h3>
-    <ul>
-      {{#each patients}}
-        <li>
-          <a href="/patients/{{this.id}}"><button>View: </button></a> {{this.dataValues.name}}
-        </li>
-      {{/each}}
-
-      {{!-- Insert helper function here
-            <ul>
-              {{#each records}}
-                <li>
-                  Name: {{this.dataValues.symptom.dataValues.name}}
-                  <br>
-                  Date: {{this.dataValues.createdAt}}
-                </li>
-              {{/each}}
-            </ul>
-      --}}
-
-  
-    </ul>
+    
+  <div class="card-body">
+    <div class="row" style="margin: auto">
+      <h3>My Patients:</h3>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-16">
+        <ul style="list-style: none;">
+          {{#each patients}}
+            <li>
+              <a href="/patients/{{this.id}}"><button>View: </button></a> {{this.dataValues.name}}
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
   </div>
-</div>  
