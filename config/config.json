@@ -1,16 +1,16 @@
 {
   "development": {
-    "username": "root",
-    "password": "root",
-    "database": "symptom_tracker_dev",
-    "host": "localhost",
-    "dialect": "mysql"
-  },
-  "test": {
     "username": "zvkdz93fkq45dh16",
     "password": "hb1uf661k8dzj64p",
     "database": "j0t6shswn5364fvf",
     "host": "etdq12exrvdjisg6.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "root",
+    "database": "symptom_tracker_dev",
+    "host": "localhost",
     "dialect": "mysql"
   },
   "production": {
