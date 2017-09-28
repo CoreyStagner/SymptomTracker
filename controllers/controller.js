@@ -83,7 +83,7 @@ module.exports = function(app){
 
 
   // Sets up Route for a Specific Doctor to show all of thier patients
-  app.get("/api/doctors/:id", function(req, res) {
+  app.get("/doctors/:id", function(req, res) {
 
     var recordData = [];
     // var patientsArray = [];
@@ -114,7 +114,7 @@ module.exports = function(app){
   });// end app.get("/api/doctors/:id")
 
   // Sets up Route for a Specific Patient to show all of thier Health Records
-  app.get("/api/patients/:id", function(req, res) {
+  app.get("/patients/:id", function(req, res) {
     var patientData = [];
     var recordData = [];
     var symptomData = [];
@@ -128,7 +128,7 @@ module.exports = function(app){
     })// end findAll()
     .then(function(records) {
       recordData = records;
-      console.log("Record Data: ", recordData[0].dataValues.symptom.dataValues.name);
+      // console.log("Record Data: ", recordData[0].dataValues.symptom.dataValues.name);
     });// end .then()
 
     models.patients.findAll({
@@ -237,21 +237,41 @@ module.exports = function(app){
 
   // Post route to verify if user is true
   app.post("/userLogin", function(req, res) {
-    var salt = "54d6f7g8h9j0k9j8h7gf6";
-    var data = req.body.password + salt;
-    var md5Pw = crypto.createHash('md5').update(data).digest("hex");
+    // console.log("posted:", req.body);
+    var enteredPass = req.body.userPassword;
+    // var salt = "54d6f7g8h9j0k9j8h7gf6";
+    // var data = req.body.pass + salt;
+    // var md5Pw = crypto.createHash('md5').update(data).digest("hex");
     models.patients.findAll({ where: {
       name: req.body.userName
     }}).then(function (response) {
-      console.log(response);
+      // console.log("response: ", response);
 
-      if (md5Pw !== response[0].dataValues.password) {
+      if (req.body.userPassword !== response[0].dataValues.pass) {
         res.send('Failed to authenticate');
       } else {
         res.redirect("/patients/" + response[0].dataValues.id);
       }// end if/else()
     });// end .then()
   });// end app.post("/userLogin")
+
+  // app.post("/userLogin", function(req, res) {
+  //   console.log("posted:", req.body);
+  //   var salt = "54d6f7g8h9j0k9j8h7gf6";
+  //   var data = req.body.pass + salt;
+  //   var md5Pw = crypto.createHash('md5').update(data).digest("hex");
+  //   models.patients.findAll({ where: {
+  //     name: req.body.userName
+  //   }}).then(function (response) {
+  //     console.log(response);
+
+  //     if (md5Pw !== response[0].dataValues.password) {
+  //       res.send('Failed to authenticate');
+  //     } else {
+  //       res.redirect("/patients/" + response[0].dataValues.id);
+  //     }// end if/else()
+  //   });// end .then()
+  // });// end app.post("/userLogin")
 
   app.post("/userSignup", function(req, res) {
     console.log(req);
@@ -264,11 +284,29 @@ module.exports = function(app){
       password: md5Pw,
       salt: salt
     }).then(function(newUser) {
+      // res.redirect("/");
       res.render("userLogin");
     });// end .then()
   });// end app.post("/userSignup")
 
+  app.post("/doctorLogin", function(req, res) {
+    console.log("posted:", req.body);
+    var enteredPass = req.body.userPassword;
+    // var salt = "54d6f7g8h9j0k9j8h7gf6";
+    // var data = req.body.pass + salt;
+    // var md5Pw = crypto.createHash('md5').update(data).digest("hex");
+    models.doctors.findAll({ where: {
+      name: req.body.userName
+    }}).then(function (response) {
+      console.log("response: ", response);
 
+      if (req.body.userPassword !== response[0].dataValues.pass) {
+        res.send('Failed to authenticate');
+      } else {
+        res.redirect("/doctors/" + response[0].dataValues.id);
+      }// end if/else()
+    });// end .then()
+  });// end app.post("/doctorLogin")
 
 
 

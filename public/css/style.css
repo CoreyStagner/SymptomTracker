@@ -63,6 +63,10 @@ body {
     margin-top: 25px;
 }
 
+.blank-spacer{
+    height: 10px;
+}
+
 @media screen and (max-width: 576px) { 
         .jumbotron {
             display: none;

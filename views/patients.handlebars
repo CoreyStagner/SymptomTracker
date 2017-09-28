@@ -11,7 +11,7 @@
     
     <div class="card-body">
   
-      <div id="demo" class="yui3-skin-sam"> <!-- You need this skin class -->
+      {{!-- <div id="demo" class="yui3-skin-sam"> <!-- You need this skin class -->
 
         <div id="leftcolumn">
         <!-- Container for the calendar -->
@@ -22,17 +22,19 @@
               <button id="toggleNextMonth" class="yui3-button">Toggle Next Month's Dates</button><br>
               Selected date: <span id="selecteddate"></span>
             </div>
-          </div>
-  
-<div id="rightcolumn">
-  <form id="newRecord-form">
-    <div class="form-group">
-      <label for="exampleFormControlSelect2">Report a new symptom</label>
-      {{> symDDList}}
-    </div>
-    <button id="newRecord" type="submit">Report</button>
-  </form>
+          </div> --}}
+    
+  <div id="leftcolumn">
+    <form id="newRecord-form">
+      <div class="form-group">
+        <label for="exampleFormControlSelect2">Report a new symptom</label>
+        {{> symDDList}}
+      </div>
+      <button id="newRecord" type="submit">Report</button>
+    </form>
+  </div>
 
+  <div id="rightcolumn">
     <ul>
       {{#each records}}
         <li>
@@ -42,7 +44,7 @@
         </li>
       {{/each}}
     </ul>
-</div>
+  </div>
 </div>
   
   <!-- Symptom form -->
@@ -52,7 +54,7 @@
 
 
 <script type="text/javascript">
-YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
+{{!-- YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
 
     // Create a new instance of calendar, placing it in
     // #mycalendar container, setting its width to 340px,
@@ -99,15 +101,11 @@ YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
       ev.preventDefault();
       calendar.set('showNextMonth', !(calendar.get("showNextMonth")));
     });
-});
+}); --}}
 </script>
 
     </div>
-    <!--Copyright-->
-    <div class="card-footer">
-            © 2017 Copyright: <a href="https://www.MDBootstrap.com"> Project 2 </a>
-    </div>
-    </div>
+    
 
 
 </body>

@@ -18,7 +18,8 @@ $(document).ready(function() {
     }// end if()
     else{
       postNewDoctor({
-        name: newDoctorName
+        name: newDoctorName,
+        pass: "doctor"
       });// end postNewDoctor()
     }// end else
 
