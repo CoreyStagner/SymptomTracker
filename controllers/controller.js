@@ -182,13 +182,17 @@ module.exports = function(app){
         var symptomData = [];
         var recordData = [];
 
-        models.patients.findAll({})
+        models.patients.findAll({
+          order: ["name"]
+        })
         .then(function(patients) {
           patientData = patients;
           // res.render("patients", {patients:patients});
         });// end patients.findAll({})
       
-        models.symptoms.findAll({})
+        models.symptoms.findAll({
+          order: ["name"]
+        })
         .then(function(symptoms) {
           symptomData = symptoms;
         });// end symptoms.findAll({})
@@ -267,6 +271,7 @@ module.exports = function(app){
         });// end .then()
 
         models.symptoms.findAll({
+          order: ["name"]
         })// end symptoms.findAll({})
         .then(function(symptomData) {
           // symptomData = symptoms;
