@@ -150,6 +150,41 @@ module.exports = function(app){
         });// end .then()
       });// end app.get("/api/doctors/:id")
 
+      app.get("/patients/log/:id", function(req, res) {
+        var patientData = [];
+        var recordData = [];
+        var symptomData = [];
+        var patID = req.params.id;
+
+        models.health_records.findAll({
+          where: {
+            patientId: patID
+          },
+          include: [models.symptoms]
+        })// end findAll()
+        .then(function(records) {
+          recordData = records;
+        });// end .then()
+
+        models.patients.findAll({
+          where: {
+            id: req.params.id
+          }
+        })// end findAll()
+        .then(function(patients) {
+          patientData = patients;
+          // console.log("patient Data: ", patientData);
+        });// end .then()
+
+        models.symptoms.findAll({
+        })// end symptoms.findAll({})
+        .then(function(symptomData) {
+          // symptomData = symptoms;
+          handlebars.registerPartial("symDDList", {symptoms:symptomData});
+          res.render("records", {symptoms:symptomData, patients:patientData, records:recordData});
+        });// end .then()
+      });// end app.get("/api/doctors/:id")
+
 
     // Authentication Routes
     //===============================

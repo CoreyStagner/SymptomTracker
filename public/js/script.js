@@ -278,9 +278,7 @@ $(document).ready(function() {
     if(!userName || !userPassword) {
         alert("Please fill all fields!");
         return;
-    } else {
-        // alert("Got Data: " + userName + "   " + userPassword);
-        
+    } else {      
           postLogin({
             name: userName,
             pass: userPassword,

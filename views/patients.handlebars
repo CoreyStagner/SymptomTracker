@@ -1,44 +1,39 @@
-{{!-- Jeff layout --}}
-<div class="container1">
+<div class="container2">
   <div class="card text-center">
-
-
-<div class="card-body">
-    <div class="row">
-    <div class="col-md-6">
-      <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%2333ccff&amp;ctz=America%2FNew_York" style="border-width:0" width="500" height="400" frameborder="0" scrolling="no"></iframe>
-    </div>
-
-
     <div class="card-header">
       {{#each patients}}
         <h1 class="card-title">Welcome {{this.dataValues.name}}</h1>
-    </div>
-      <div id="patientID" value="{{this.dataValues.id}}"></div>
+        <div id="patientID" value="{{this.dataValues.id}}"></div>
         {{/each}}
-      </d iv>
-  <div class="row">
-    <ul class="list-group doctor-list">
-      <li class="list-group-item new-item" style="margin-left: 195px; margin-top: 20px; margin-bottom: 20px;">
-        <form id="newRecord-form" method="POST" action="/api/health_record">
-            {{> symDDList}}
-        <button id="newRecord" type="submit">Add a new symptom</button>
-        </form>
-      </li>
-      <span class="doctor-container"></span>
-    </ul>
-  </div>
-    <h3>My Symptom Record</h3>
-      <ul style="list-style: none;">
-        {{#each records}}
-          <li>
-            Symptom: {{this.dataValues.symptom.dataValues.name}}
-          <br>
-            Date: {{this.dataValues.createdAt}}
-          </li>
-          {{/each}}
-      </ul>
+
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <!-- Container for the calendar -->
+        <div class="col-sm-6">
+          <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%2333ccff&amp;ctz=America%2FNew_York"
+            style="border-width:0" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
+        </div>
+        <div class="col-sm-6">
+          <ul class="list-group doctor-list">
+            <li class="list-group-item new-item">
+              <form id="newRecord-form" method="POST" action="/api/health_record">
+                <div>
+                  <span>Report a symptom: </span>{{> symDDList}}
+                </div>
+                <div class="spacer" style="height: 10px;"></div>
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Notes:</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                  <button id="newSymptom" type="submit">Report New Symptom</button>
+                </div>
+              </form>
+            </li>
+                  <button id="viewRecords">View All My Symptoms</button>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
