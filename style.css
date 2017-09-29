@@ -1,7 +1,7 @@
-/* @font-face {
+@font-face {
     font-family: myFirstFont;
     src: url(HappyTime.otf);
-} */
+}
 
 h1 {
     font-size: 50px;
@@ -10,8 +10,7 @@ h1 {
 body {
     width:800;
     margin:auto;
-    font-family: myFirstFont;
-    background-image: url("../images/medical-background-97.jpg");
+    background-image: url("medical-background-97.jpg");
 }
 
 .container {
@@ -19,7 +18,7 @@ body {
 }
 
 .jumbotron {
-    background-image: url("../images/header1.jpg");
+    background-image: url("header1.jpg");
     font-family: myFirstFont;
     height: 275px;
     margin-top: 25px;
@@ -36,6 +35,7 @@ body {
 }
 
 .form-control {
+    width: 80%;
     align-content: center;
 }
 
@@ -55,7 +55,6 @@ body {
 }
 
 .container2 {
-    width: 90%;
     margin: auto;
     border-style: solid;
     border-color: white;
@@ -63,8 +62,6 @@ body {
     margin-bottom: 25px;
     margin-top: 25px;
 }
-
-
 
 @media screen and (max-width: 576px) { 
         .jumbotron {
@@ -85,4 +82,10 @@ body {
      .jumbotron {
        background-image: url(null)
     }
+}
+
+.yui3-button {
+    margin:10px 0px 10px 0px;
+    color: #fff;
+    background-color: #3476b7;
 }

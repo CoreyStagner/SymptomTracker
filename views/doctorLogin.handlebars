@@ -1,0 +1,53 @@
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Symptom Tracker</h1>
+        </div>
+    </div>
+
+        <div class="container1">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h4 class="card-title">Doctor Sign In</h4>
+               </div>
+        <div class="card-body">
+            <form action="/doctorLogin" method="post">
+                <div class="form-group">
+                    <label for="userName">Username</label>
+                    <input name="userName" type="ID" class="input-block-level" id="userName" aria-describedby="ID Help" placeholder="Enter Username">
+                    <small id="IDHelp" class="form-text text-muted">We'll never share your information with anyone else.</small>
+                </div>
+  
+                <div class="form-group">
+                    <label for="userPassword">Password</label>
+                    <input name="userPassword" type="password" class="input-block-level" id="userPassword" placeholder="Enter Password">
+                </div>
+                <div>
+                    <input class="btn btn-primary" type="submit" value="Login" />
+                </div>
+                {{!-- <p>or <a href="/userSignup">Create New Account</a></p> --}}
+            </form>
+            
+            
+            
+            
+            {{!-- <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Doctor ID</label>
+                    <input type="ID" class="input-block-level" id="exampleInputID" aria-describedby="ID Help" placeholder="Enter ID">
+                    <small id="IDHelp" class="form-text text-muted">We'll never share your ID with anyone else.</small>
+                </div>
+  
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="input-block-level" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <div>
+                    <input class="btn btn-primary" type="submit" value="Login" />
+                </div>
+            </form> --}}
+        </div>
+    <!--Copyright-->
+    <div class="card-footer">
+            © 2017 Copyright: <a href="https://www.MDBootstrap.com"> Project 2 </a>
+    </div>
+    </div>

@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
-  getPatients();
-  getDoctors();
-  getSymptoms();
-  getRecords();
+  // getPatients();
+  // getDoctors();
+  // getSymptoms();
+  // getRecords();
 
   // Handle Doctor Actions
   $(document).on("submit", "#newDoctor-form", handleNewDoctor);
@@ -18,14 +18,17 @@ $(document).ready(function() {
     }// end if()
     else{
       postNewDoctor({
-        name: newDoctorName
+        name: newDoctorName,
+        pass: "doctor"
       });// end postNewDoctor()
     }// end else
 
     function postNewDoctor(data) {
       console.log("ran postNewDoctor() with data: ", data);
-      $.post("/api/Doctors", data);
-        // .then(getDoctors);
+      $.post("/api/doctors", data)
+        .then(function(){
+          window.location.reload();
+        });// end .then()
     }// end postNewPatient
   }// end handleNewDoctor
 
@@ -36,7 +39,7 @@ $(document).ready(function() {
       for (var i = 0; i< data.length; i++) {
         rowsToAdd.push(createDoctorRow(data[i])); 
       }// end if()
-      $("#DoctorName").val("");
+      $("#doctorName").val("");
     });// end .get()
   }// end getDoctors()
 
@@ -74,8 +77,10 @@ $(document).ready(function() {
 
     function postNewSymptom(data) {
       console.log("ran postNewSymptom() with data: ", data);
-      $.post("/api/symptoms", data);
-        // .then(getSymptoms);
+      $.post("/api/symptoms", data)
+        .then(function(){
+          window.location.reload();
+        });// end .then()
     }// end postNewPatient
   }// end handleNewSymptom
 
@@ -128,7 +133,9 @@ $(document).ready(function() {
     function postNewPatient(data) {
       console.log("ran postNewPatient() with data: ", data);
       $.post("/api/patients", data)
-        .then(getPatients);
+        .then(function(){
+          window.location.reload();
+        });// end .then()
     }// end postNewPatient
   
     function getPatients() {
@@ -185,7 +192,9 @@ $(document).ready(function() {
     function postNewRecord(data) {
       console.log("ran postNewRecord() with data: ", data);
       $.post("/api/health_records", data)
-        .then(getRecords);
+        .then(function(){
+          window.location.reload();
+        });// end .then()
     }// end postNewRecord
   
     function getRecords() {
@@ -208,4 +217,77 @@ $(document).ready(function() {
       return newTr;
     }// end createRecordRow()
 
-  });//end document.ready
+
+
+
+
+
+    
+
+  $(document).on("submit", "#userSignup", handleNewUser);
+  
+  function handleNewUser(event){
+    console.log("ran handleNewUser()");
+    event.preventDefault();
+    var userName = $("#userName").val();
+    var userPassword = $("#userPassword").val();
+    var userPasswordVerify = $("#userPasswordVerify").val();
+    var userDocID = $("#userDocID option:selected").attr("value");
+
+    if(!userName || !userPassword || !userPasswordVerify || !userDocID) {
+        alert("Please fill all fields!");
+        return;
+    } else {
+        // alert("Got Data: " + userName + "   " + userPassword + "   " + userPasswordVerify + "   " + userDocID);
+        if(userPassword !== userPasswordVerify){
+          alert("Passwords do not match please use the same password!");
+          return;
+        } else {
+          postNewPatient({
+            name: userName,
+            pass: userPassword,
+            doctorId: userDocID,
+            salt: "54d6f7g8h9j0k9j8h7gf6"
+          });// end postNewPatient()
+        }// end if/else()
+    }// end if/else()
+  }// end handleNewUser
+  
+
+
+
+  function postLogin(data) {
+    console.log("posted login with: ", data);
+    $.post("/userLogin", data)
+      .then(function(){
+        window.location.reload();
+      });// end .then()
+  }// end postNewPatient
+
+
+
+  $(document).on("submit", "#userLogin", handleLogin);
+  
+  function handleLogin(event){
+    console.log("ran handleNewUser()");
+    event.preventDefault();
+    var userName = $("#userName").val();
+    var userPassword = $("#userPassword").val();
+    var salt = "54d6f7g8h9j0k9j8h7gf6";
+
+    if(!userName || !userPassword) {
+        alert("Please fill all fields!");
+        return;
+    } else {      
+          postLogin({
+            name: userName,
+            pass: userPassword,
+            salt: "54d6f7g8h9j0k9j8h7gf6"
+          });// end postNewPatient()
+        }// end if/else()
+  };// end handleNewUser
+
+
+
+
+});//end document.ready
