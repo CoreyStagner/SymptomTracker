@@ -19,5 +19,34 @@
     "database": "j0t6shswn5364fvf",
     "host": "etdq12exrvdjisg6.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
+  },
+  "corey": {
+    "username": "root",
+    "password": "root",
+    "database": "symptom_tracker_dev",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "mag": {
+    "username": "root",
+    "password": "root",
+    "database": "symptom_tracker_dev",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "chaudhry": {
+    "username": "root",
+    "password": "root",
+    "database": "symptom_tracker_dev",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "jeff": {
+    "username": "root",
+    "password": "root",
+    "database": "symptom_tracker_dev",
+    "host": "localhost",
+    "dialect": "mysql",
+    "port": "8889"
   }
 }
