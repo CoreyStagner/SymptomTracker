@@ -9,18 +9,21 @@
   <div class="row">
     <div class="col-md-6">
       <h2>ADD A PATIENT</h2>
-
+      
           <ul class="list-group patient-list">
             <li class="list-group-item new-item">
+              <div>
               <form id="newPatient-form" method="POST" action="/">
-                <input class="new-item" placeholder="Please Enter Name" type="text" id="patientName" />    {{> docDDList}}
-               
+                <input class="new-item" placeholder="Please Enter Name" type="text" id="patientName" />
+                  {{> docDDList}}
+                  <br>
                   <button id="newPatient" type="submit">Add New Patient</button>
               </form>
+              </div>
             </li>
             <span class="patient-container"></span>
           </ul>
-    </div>
+  
 
   <div class="col-md-6">
     <h3>Patients</h3>
@@ -32,7 +35,8 @@
         {{/each}}
       </ul>
     </div> 
-  
+  </div>
+
   <div class="row">
     <div class="col-md-6">
       <h2>ADD A SYMPTOM</h2>
