@@ -1,17 +1,24 @@
-/* @font-face {
+@font-face {
     font-family: myFirstFont;
     src: url(HappyTime.otf);
-} */
+}
 
 h1 {
     font-size: 50px;
 }
+html {
+    height: 100%;
+}
 
 body {
+    height: 100%;
+    margin: 0;
     width:800;
-    margin:auto;
     font-family: myFirstFont;
-    background-image: url("../images/medical-background-97.jpg");
+    background-image: url("../images/background_main.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .container {
@@ -65,7 +72,6 @@ body {
 }
 
 
-
 @media screen and (max-width: 576px) { 
         .jumbotron {
             display: none;
@@ -73,7 +79,7 @@ body {
      }
 
 /*Medium devices (tablets, 768px and up)*/
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 768px) {
      .tablets-only {
        display:none !important;
     }
@@ -85,4 +91,17 @@ body {
      .jumbotron {
        background-image: url(null)
     }
+}
+
+#leftcolumn {
+    width: 50%;
+    margin: 0px;
+    float: left;
+}
+
+#rightcolumn {
+    width: 50%;
+    margin: 0px;
+    float: right;
+    padding-left: 50px;
 }
