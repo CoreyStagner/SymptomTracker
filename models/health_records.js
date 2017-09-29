@@ -7,6 +7,10 @@ module.exports = function (sequelize, DataTypes) {
       autoIncrement: true,
       primaryKey: true
     },// end id
+    notes: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },// end notes
     createdAt: {
       type: DataTypes.DATE,
       allowNull: true
@@ -16,6 +20,16 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: true
     }// end updatedAt
   });// end define("health_records")
+
+
+
+
+
+  
+
+
+
+
 
   health_records.associate = function (models) {
     health_records.belongsTo(models.patients, {

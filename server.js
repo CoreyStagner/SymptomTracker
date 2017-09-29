@@ -10,7 +10,8 @@ var bodyParser = require ('body-parser');
 var db = require('./models');
 var sequelize = require("sequelize");
 var exphbs = require("express-handlebars");
- 
+var moment = require('moment'); 
+
 //===============================================================
 // Set up Express App
 //===============================================================

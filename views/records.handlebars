@@ -1,26 +1,27 @@
-<div class="container1">
+<div class="card container1">
   <div class="card text-center">
 
 
     <div class="card-header">
       {{#each patients}}
-        <h1 class="card-title">Welcome {{this.dataValues.name}}</h1>
+      <h1 class="card-title">Welcome {{this.dataValues.name}}</h1>
     </div>
-      <div id="patientID" value="{{this.dataValues.id}}"></div>
-        {{/each}}
-      </div>
-  
-    <h3>My Symptom Record</h3>
-      <ul style="list-style: none;">
-        {{#each records}}
-          <li>
-            Symptom: {{this.dataValues.symptom.dataValues.name}}
-          <br>
-            Date: {{this.dataValues.createdAt}}
-          </li>
-          {{/each}}
-      </ul>
-    </div>
+    <div id="patientID" value="{{this.dataValues.id}}"></div>
+    <a href="/patients/{{this.id}}"><button style="width:100%;">Record a new Symptom</button></a>
+    {{/each}}
   </div>
-</div>
 
+  <h3>My Symptom Record</h3>
+  <ul style="list-style: none;">
+    {{#each records}}
+    <li>
+      Symptom: {{this.symptom}}
+      <br> Date: {{this.createdAt}}
+    </li>
+    <li>
+      Notes: {{this.notes}}
+    </li>
+    <br>
+    {{/each}}
+  </ul>
+</div>

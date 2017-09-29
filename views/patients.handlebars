@@ -2,9 +2,9 @@
   <div class="card text-center">
     <div class="card-header">
       {{#each patients}}
-        <h1 class="card-title">Welcome {{this.dataValues.name}}</h1>
-        <div id="patientID" value="{{this.dataValues.id}}"></div>
-        {{/each}}
+      <h1 class="card-title">Welcome {{this.dataValues.name}}</h1>
+      <div id="patientID" value="{{this.dataValues.id}}"></div>
+      {{/each}}
 
     </div>
     <div class="card-body">
@@ -24,14 +24,16 @@
                 <div class="spacer" style="height: 10px;"></div>
                 <div class="form-group">
                   <label for="exampleFormControlTextarea1">Notes:</label>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  <textarea class="form-control" id="recordNotes" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                   <button id="newSymptom" type="submit">Report New Symptom</button>
                 </div>
               </form>
             </li>
-                  <button id="viewRecords">View All My Symptoms</button>
+            {{#each patients}}
+              <a href="/patients/log/{{this.id}}"><button style="width:100%;">View All My Symptoms</button></a>
+            {{/each}}
           </ul>
         </div>
       </div>

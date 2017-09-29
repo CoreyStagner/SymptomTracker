@@ -168,13 +168,16 @@ $(document).ready(function() {
 
 
 
+
+
+
   // Handle Health Record Actions
   $(document).on("submit", "#newRecord-form", handleNewRecord);
   function handleNewRecord(event){
     console.log("ran handleNewRecord()");
     event.preventDefault();
-    // var newRecordName = $("#recordName").val().trim().trim();
     var recordPatientID = $("#patientID").attr("value");
+    var recordNotes = $("#recordNotes").val();
     console.log(recordPatientID);
     var recordSymID = $("#patientSymID option:selected").attr("value");
     if(!recordSymID) {
@@ -184,7 +187,8 @@ $(document).ready(function() {
     else{
       postNewRecord({
         symptomId: recordSymID,
-        patientId: recordPatientID
+        patientId: recordPatientID,
+        notes: recordNotes
       });// end postNewRecord()
     }// end else
     }// end handleNewRecord()

@@ -6,6 +6,7 @@ var async = require('async');
 var handlebars = require("handlebars");
 var crypto = require('crypto');
 var moment = require('moment');
+var sequelize = require('sequelize');
 
 module.exports = function(app){
 
@@ -14,7 +15,7 @@ module.exports = function(app){
   //===============================
 
   app.get("/calendar", function(req, res) {
-    res.render("calendar")
+    res.render("calendar");
   });
 
   // Sets up the home page
@@ -285,9 +286,20 @@ module.exports = function(app){
             patientId: patID
           },
           include: [models.symptoms]
-        })// end findAll()
+          })// end findAll()
         .then(function(records) {
-          recordData = records;
+          unformattedData = records;
+          unformattedData.forEach(function (input){
+            var formattedData = {
+              id: input.dataValues.id,
+              notes: input.dataValues.notes,
+              createdAt: moment(input.dataValues.createdAt).format("MMMM Do YYYY, h:mm:ss a"),
+              symptom: input.dataValues.symptom.dataValues.name
+            }
+            recordData.push(formattedData);
+          });
+        
+          // recordData = records;
         });// end .then()
 
         models.patients.findAll({
@@ -398,7 +410,7 @@ module.exports = function(app){
 
       // Post Route for a new Health Record
       app.post("/api/health_records", function(req,res) {
-        // console.log("/api/health_records received a new patient post: ", req.body);
+        console.log("/api/health_records received a new patient post: ", req.body);
         models.health_records.create(req.body)
         .then(function(data){
           res.json(data);
