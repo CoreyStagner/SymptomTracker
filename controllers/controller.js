@@ -53,326 +53,185 @@ module.exports = function(app){
   //====== Route Methods
   //===============================
   
-  // Sets up the home page
-  app.get("/", function(req, res) {
-    console.log("User went to ('/')");
-    res.render("index");
-  });// end app.get("/")
+    // Sets up the home page
+    app.get("/", function(req, res) {
+      console.log("User went to ('/')");
+      res.render("index");
+    });// end app.get("/")
 
 
-  // Sets up the admin page
-  app.get("/admin", function(req, res) {
-    console.log("User went to ('/admin')");
-    var patientData = [];
-    var doctorData = [];
-    var symptomData = [];
-    var recordData = [];
+    // Sets up the admin page
+    app.get("/admin", function(req, res) {
+      console.log("User went to ('/admin')");
+      var patientData = [];
+      var doctorData = [];
+      var symptomData = [];
+      var recordData = [];
 
-    models.patients.findAll({})
-    .then(function(patients) {
-      patientData = patients;
-      // res.render("patients", {patients:patients});
-    });// end patients.findAll({})
-  
-    models.symptoms.findAll({})
-    .then(function(symptoms) {
-      symptomData = symptoms;
-    });// end symptoms.findAll({})
+      models.patients.findAll({})
+      .then(function(patients) {
+        patientData = patients;
+        // res.render("patients", {patients:patients});
+      });// end patients.findAll({})
+    
+      models.symptoms.findAll({})
+      .then(function(symptoms) {
+        symptomData = symptoms;
+      });// end symptoms.findAll({})
 
-    models.doctors.findAll({
-      order: ["name"]
-    }).then(function(doctors) {
-      // console.log(doctors);
-      doctorData = doctors;
-      handlebars.registerPartial("docDDList", {doctors:doctorData});
-      res.render("admins", {patients: patientData, doctors: doctorData, symptoms: symptomData});
-    });
-  });// end app.get("/admin")
+      models.doctors.findAll({
+        order: ["name"]
+      }).then(function(doctors) {
+        // console.log(doctors);
+        doctorData = doctors;
+        handlebars.registerPartial("docDDList", {doctors:doctorData});
+        res.render("admin", {patients: patientData, doctors: doctorData, symptoms: symptomData});
+      });
+    });// end app.get("/admin")
 
-  // Sets up the old admin page
-  app.get("/api/admin", function(req, res) {
-    console.log("User went to ('/api/admin')");
-    var patientData = [];
-    var doctorData = [];
-    var symptomData = [];
-    var recordData = [];
+    // Sets up the old admin page
+    app.get("/api/admin", function(req, res) {
+      console.log("User went to ('/api/admin')");
+      var patientData = [];
+      var doctorData = [];
+      var symptomData = [];
+      var recordData = [];
 
-    models.patients.findAll({})
-    .then(function(patients) {
-      patientData = patients;
-      // res.render("patients", {patients:patients});
-    });// end patients.findAll({})
-  
-    models.symptoms.findAll({})
-    .then(function(symptoms) {
-      symptomData = symptoms;
-    });// end symptoms.findAll({})
+      models.patients.findAll({})
+      .then(function(patients) {
+        patientData = patients;
+        // res.render("patients", {patients:patients});
+      });// end patients.findAll({})
+    
+      models.symptoms.findAll({})
+      .then(function(symptoms) {
+        symptomData = symptoms;
+      });// end symptoms.findAll({})
 
-    models.doctors.findAll({
-      order: ["name"]
-    }).then(function(doctors) {
-      // console.log(doctors);
-      doctorData = doctors;
-      handlebars.registerPartial("docDDList", {doctors:doctorData});
-      res.render("admin", {patients: patientData, doctors: doctorData, symptoms: symptomData});
-    });
-  });// end app.get("/api/admin")
+      models.doctors.findAll({
+        order: ["name"]
+      }).then(function(doctors) {
+        // console.log(doctors);
+        doctorData = doctors;
+        handlebars.registerPartial("docDDList", {doctors:doctorData});
+        res.render("admin", {patients: patientData, doctors: doctorData, symptoms: symptomData});
+      });
+    });// end app.get("/api/admin")
 
-  // Sets up the page for the specified doctor to see his patients
-  app.get("/doctors/:id", function(req, res) {
+    // Sets up the page for the specified doctor to see his patients
+    app.get("/doctors/:id", function(req, res) {
 
-    var recordData = [];
-    // var patientsArray = [];
-    // var patientsObject = {};
+      var recordData = [];
+      // var patientsArray = [];
+      // var patientsObject = {};
 
-    models.health_records.findAll({
-      include: [models.symptoms]
-    })
-    .then(function(records){
-      recordData = records;
-      console.log("recordData: ", recordData);
-    });// end health_records.findAll({})
+      models.health_records.findAll({
+        include: [models.symptoms]
+      })
+      .then(function(records){
+        recordData = records;
+        console.log("recordData: ", recordData);
+      });// end health_records.findAll({})
 
-    models.patients.findAll({
-      where: {
-        doctorID: req.params.id
-      }
-    })// end findAll()
-    .then(function(patientData) {
+      models.patients.findAll({
+        where: {
+          doctorID: req.params.id
+        }
+      })// end findAll()
+      .then(function(patientData) {
 
-      // var object = {
-      //   patient: ,
-      //   record:
-      // }
+        // var object = {
+        //   patient: ,
+        //   record:
+        // }
 
-      res.render("doctors", {patients:patientData,  records:recordData});
-    });// end .then()
-  });// end app.get("/api/doctors/:id")
+        res.render("doctors", {patients:patientData,  records:recordData});
+      });// end .then()
+    });// end app.get("/api/doctors/:id")
 
-  // Sets up the page for the specified doctor to add new symptoms
-  app.get("/patients/:id", function(req, res) {
-    var patientData = [];
-    var recordData = [];
-    var symptomData = [];
-    var patID = req.params.id;
+    // Sets up the page for the specified doctor to add new symptoms
+    app.get("/patients/:id", function(req, res) {
+      var patientData = [];
+      var recordData = [];
+      var symptomData = [];
+      var patID = req.params.id;
 
-    models.health_records.findAll({
-      where: {
-        patientId: patID
-      },
-      include: [models.symptoms]
-    })// end findAll()
-    .then(function(records) {
-      recordData = records;
-      console.log("Record Data: ", recordData[0].dataValues.symptom.dataValues.name);
-    });// end .then()
+      models.health_records.findAll({
+        where: {
+          patientId: patID
+        },
+        include: [models.symptoms]
+      })// end findAll()
+      .then(function(records) {
+        recordData = records;
+        console.log("Record Data: ", recordData[0].dataValues.symptom.dataValues.name);
+      });// end .then()
 
-    models.patients.findAll({
-      where: {
-        id: req.params.id
-      }
-    })// end findAll()
-    .then(function(patients) {
-      patientData = patients;
-      // console.log("patient Data: ", patientData);
-    });// end .then()
+      models.patients.findAll({
+        where: {
+          id: req.params.id
+        }
+      })// end findAll()
+      .then(function(patients) {
+        patientData = patients;
+        // console.log("patient Data: ", patientData);
+      });// end .then()
 
-    models.symptoms.findAll({
-    })// end symptoms.findAll({})
-    .then(function(symptomData) {
-      // symptomData = symptoms;
-      handlebars.registerPartial("symDDList", {symptoms:symptomData});
-      res.render("patients", {symptoms:symptomData, patients:patientData, records:recordData});
-    });// end .then()
-  });// end app.get("/api/doctors/:id")
+      models.symptoms.findAll({
+      })// end symptoms.findAll({})
+      .then(function(symptomData) {
+        // symptomData = symptoms;
+        handlebars.registerPartial("symDDList", {symptoms:symptomData});
+        res.render("patients", {symptoms:symptomData, patients:patientData, records:recordData});
+      });// end .then()
+    });// end app.get("/api/doctors/:id")
 
-    // Basic Routes
-    //===============================
+    // Sets up the page for a user to see all of the symptoms that they have posted
+    app.get("/patients/log/:id", function(req, res) {
+      var patientData = [];
+      var recordData = [];
+      var symptomData = [];
+      var patID = req.params.id;
 
-
-      // // Sets up the home page
-      // app.get("/", function(req, res) {
-      //   // console.log("User went to ('/')");
-      //   res.render("index");
-      // });// end app.get("/")
-
-      // // Set up basic Doctor route
-      // app.get("/api/doctors", function(req, res){
-      //   models.doctors.findAll({
-      //     order: ["name"]
-      //   });//end app.get("/api/doctors")
-      // });
-
-      // // Set up basic Patient route
-      // app.get("/api/patients", function(req, res){
-      //   models.patients.findAll({
-      //   });//end app.get("/api/patients")
-      // });
-
-      // // Set up basic Symptom route
-      // app.get("/api/symptoms", function(req, res){
-      //   models.symptoms.findAll({
-      //   });//end app.get("/api/symptoms")
-      // });
-
-      // // Set up basic Health Record route
-      // app.get("/api/health_records", function(req, res){
-      //   models.health_records.findAll({
-      //   });//end app.get("/api/health_records")
-      // });
-
-      // // Set up basic Admin route
-      // app.get("/api/admin", function(req, res) {
-      //   // console.log("User went to ('/api/admin')");
-      //   var patientData = [];
-      //   var doctorData = [];
-      //   var symptomData = [];
-      //   var recordData = [];
-
-      //   models.patients.findAll({
-      //     order: ["name"]
-      //   })
-      //   .then(function(patients) {
-      //     patientData = patients;
-      //     // res.render("patients", {patients:patients});
-      //   });// end patients.findAll({})
-      
-      //   models.symptoms.findAll({
-      //     order: ["name"]
-      //   })
-      //   .then(function(symptoms) {
-      //     symptomData = symptoms;
-      //   });// end symptoms.findAll({})
-
-      //   models.doctors.findAll({
-      //     order: ["name"]
-      //   }).then(function(doctors) {
-      //     // console.log(doctors);
-      //     doctorData = doctors;
-      //     handlebars.registerPartial("docDDList", {doctors:doctorData});
-      //     res.render("admin", {patients: patientData, doctors: doctorData, symptoms: symptomData});
-      //   });
-      // });// end app.get("/api/admin")
-
-
-    // // Focused Routes
-    // //===============================
-
-
-    //   // Sets up Route for a Specific Doctor to show all of thier patients
-    //   app.get("/doctors/:id", function(req, res) {
-
-    //     var recordData = [];
-    //     // var patientsArray = [];
-    //     // var patientsObject = {};
-
-    //     models.health_records.findAll({
-    //       include: [models.symptoms]
-    //     })
-    //     .then(function(records){
-    //       recordData = records;
-    //       // console.log("recordData: ", recordData);
-    //     });// end health_records.findAll({})
-
-    //     models.patients.findAll({
-    //       where: {
-    //         doctorID: req.params.id
-    //       }
-    //     })// end findAll()
-    //     .then(function(patientData) {
-
-    //       // var object = {
-    //       //   patient: ,
-    //       //   record:
-    //       // }
-
-    //       res.render("doctors", {patients:patientData,  records:recordData});
-    //     });// end .then()
-    //   });// end app.get("/api/doctors/:id")
-
-    //   // Sets up Route for a Specific Patient to show all of thier Health Records
-    //   app.get("/patients/:id", function(req, res) {
-    //     var patientData = [];
-    //     var recordData = [];
-    //     var symptomData = [];
-    //     var patID = req.params.id;
-
-    //     models.health_records.findAll({
-    //       where: {
-    //         patientId: patID
-    //       },
-    //       include: [models.symptoms]
-    //     })// end findAll()
-    //     .then(function(records) {
-    //       recordData = records;
-    //     });// end .then()
-
-    //     models.patients.findAll({
-    //       where: {
-    //         id: req.params.id
-    //       }
-    //     })// end findAll()
-    //     .then(function(patients) {
-    //       patientData = patients;
-    //       // console.log("patient Data: ", patientData);
-    //     });// end .then()
-
-    //     models.symptoms.findAll({
-    //       order: ["name"]
-    //     })// end symptoms.findAll({})
-    //     .then(function(symptomData) {
-    //       // symptomData = symptoms;
-    //       handlebars.registerPartial("symDDList", {symptoms:symptomData});
-    //       res.render("patients", {symptoms:symptomData, patients:patientData, records:recordData});
-    //     });// end .then()
-    //   });// end app.get("/api/doctors/:id")
-
-      // Sets up the page for a user to see all of the symptoms that they have posted
-      app.get("/patients/log/:id", function(req, res) {
-        var patientData = [];
-        var recordData = [];
-        var symptomData = [];
-        var patID = req.params.id;
-
-        models.health_records.findAll({
-          where: {
-            patientId: patID
-          },
-          include: [models.symptoms]
-          })// end findAll()
-        .then(function(records) {
-          unformattedData = records;
-          unformattedData.forEach(function (input){
-            var formattedData = {
-              id: input.dataValues.id,
-              notes: input.dataValues.notes,
-              createdAt: moment(input.dataValues.createdAt).format("MMMM Do YYYY, h:mm:ss a"),
-              symptom: input.dataValues.symptom.dataValues.name
-            };
-            recordData.push(formattedData);
-          });
-        
-          // recordData = records;
-        });// end .then()
-
-        models.patients.findAll({
-          where: {
-            id: req.params.id
-          }
+      models.health_records.findAll({
+        where: {
+          patientId: patID
+        },
+        include: [models.symptoms]
         })// end findAll()
-        .then(function(patients) {
-          patientData = patients;
-          // console.log("patient Data: ", patientData);
-        });// end .then()
+      .then(function(records) {
+        unformattedData = records;
+        unformattedData.forEach(function (input){
+          var formattedData = {
+            id: input.dataValues.id,
+            notes: input.dataValues.notes,
+            createdAt: moment(input.dataValues.createdAt).format("MMMM Do YYYY, h:mm:ss a"),
+            symptom: input.dataValues.symptom.dataValues.name
+          };
+          recordData.push(formattedData);
+        });
+      
+        // recordData = records;
+      });// end .then()
 
-        models.symptoms.findAll({
-        })// end symptoms.findAll({})
-        .then(function(symptomData) {
-          // symptomData = symptoms;
-          handlebars.registerPartial("symDDList", {symptoms:symptomData});
-          res.render("records", {symptoms:symptomData, patients:patientData, records:recordData});
-        });// end .then()
-      });// end app.get("/api/doctors/:id")
+      models.patients.findAll({
+        where: {
+          id: req.params.id
+        }
+      })// end findAll()
+      .then(function(patients) {
+        patientData = patients;
+        // console.log("patient Data: ", patientData);
+      });// end .then()
+
+      models.symptoms.findAll({
+      })// end symptoms.findAll({})
+      .then(function(symptomData) {
+        // symptomData = symptoms;
+        handlebars.registerPartial("symDDList", {symptoms:symptomData});
+        res.render("records", {symptoms:symptomData, patients:patientData, records:recordData});
+      });// end .then()
+    });// end app.get("/api/doctors/:id")
 
 
     // Authentication Routes
@@ -409,7 +268,6 @@ module.exports = function(app){
   //================================
   //====== Post Methods
   //================================
-
 
     // New Database Entry Post Routes
     //===============================
@@ -476,24 +334,7 @@ module.exports = function(app){
         });// end .then()
       });// end app.post("/userLogin")
 
-      // app.post("/userLogin", function(req, res) {
-      //   console.log("posted:", req.body);
-      //   var salt = "54d6f7g8h9j0k9j8h7gf6";
-      //   var data = req.body.pass + salt;
-      //   var md5Pw = crypto.createHash('md5').update(data).digest("hex");
-      //   models.patients.findAll({ where: {
-      //     name: req.body.userName
-      //   }}).then(function (response) {
-      //     console.log(response);
-
-      //     if (md5Pw !== response[0].dataValues.password) {
-      //       res.send('Failed to authenticate');
-      //     } else {
-      //       res.redirect("/patients/" + response[0].dataValues.id);
-      //     }// end if/else()
-      //   });// end .then()
-      // });// end app.post("/userLogin")
-
+      // Posts a new user to the database
       app.post("/userSignup", function(req, res) {
         // console.log(req);
         var salt = "54d6f7g8h9j0k9j8h7gf6";
@@ -510,6 +351,7 @@ module.exports = function(app){
         });// end .then()
       });// end app.post("/userSignup")
 
+      // Posts a new doctor to the database
       app.post("/doctorLogin", function(req, res) {
         // console.log("posted:", req.body);
         var enteredPass = req.body.userPassword;
