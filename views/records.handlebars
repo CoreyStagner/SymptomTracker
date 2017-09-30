@@ -9,7 +9,7 @@
     <div id="patientID" value="{{this.dataValues.id}}"></div>
     <a href="/patients/{{this.id}}"><button style="width:100%;">Record a new Symptom</button></a>
     {{/each}}
-  </div>
+
 
   <h3>My Symptom Record</h3>
   <ul style="list-style: none;">
@@ -24,4 +24,14 @@
     <br>
     {{/each}}
   </ul>
+
+  </div>
+  {{!-- Sign Out Button --}}
+      <div>
+        <a href="/"><button type="submit" class="btn btn-primary btn-lg btn-block">Sign Out</button></a>
+      </div>
+      <!--Copyright-->
+			<div class="card-footer">
+				© 2017 Copyright: <a href="https://github.com/CoreyStagner/SymptomTracker"> Project 2 </a>
+			</div>
 </div>

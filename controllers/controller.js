@@ -14,37 +14,82 @@ module.exports = function(app){
   //====== Get Methods
   //===============================
 
-  app.get("/calendar", function(req, res) {
-    res.render("calendar");
-  });
+  //====== JSON Methods
+  //===============================
+  
+    // Page to see all doctors in JSON form
+    app.get("/api/doctors", function(req, res){
+      models.doctors.findAll({
+        order: ["name"]
+      }).then(function(data){
+        res.send(data);
+      });//end app.get("/api/doctors")
+    });
 
+    // Page to see all patients in JSON form
+    app.get("/api/patients", function(req, res){
+      models.patients.findAll({
+      }).then(function(data){
+        res.send(data);
+      });//end app.get("/api/patients")
+    });
+
+    // Page to see all symptoms in JSON form
+    app.get("/api/symptoms", function(req, res){
+      models.symptoms.findAll({
+      }).then(function(data){
+        res.send(data);
+      });//end app.get("/api/symptoms")
+    });
+
+    // Page to see all heatlh records in JSON form
+    app.get("/api/health_records", function(req, res){
+      models.health_records.findAll({
+      }).then(function(data){
+        res.send(data);
+      });//end app.get("/api/health_records")
+    });
+
+  //====== Route Methods
+  //===============================
+  
   // Sets up the home page
   app.get("/", function(req, res) {
     console.log("User went to ('/')");
     res.render("index");
   });// end app.get("/")
 
-  app.get("/api/doctors", function(req, res){
+
+  // Sets up the admin page
+  app.get("/admin", function(req, res) {
+    console.log("User went to ('/admin')");
+    var patientData = [];
+    var doctorData = [];
+    var symptomData = [];
+    var recordData = [];
+
+    models.patients.findAll({})
+    .then(function(patients) {
+      patientData = patients;
+      // res.render("patients", {patients:patients});
+    });// end patients.findAll({})
+  
+    models.symptoms.findAll({})
+    .then(function(symptoms) {
+      symptomData = symptoms;
+    });// end symptoms.findAll({})
+
     models.doctors.findAll({
       order: ["name"]
-    });//end app.get("/api/doctors")
-  });
+    }).then(function(doctors) {
+      // console.log(doctors);
+      doctorData = doctors;
+      handlebars.registerPartial("docDDList", {doctors:doctorData});
+      res.render("admins", {patients: patientData, doctors: doctorData, symptoms: symptomData});
+    });
+  });// end app.get("/admin")
 
-  app.get("/api/patients", function(req, res){
-    models.patients.findAll({
-    });//end app.get("/api/patients")
-  });
-
-  app.get("/api/symptoms", function(req, res){
-    models.symptoms.findAll({
-    });//end app.get("/api/symptoms")
-  });
-
-  app.get("/api/health_records", function(req, res){
-    models.health_records.findAll({
-    });//end app.get("/api/health_records")
-  });
-
+  // Sets up the old admin page
   app.get("/api/admin", function(req, res) {
     console.log("User went to ('/api/admin')");
     var patientData = [];
@@ -300,7 +345,7 @@ module.exports = function(app){
               notes: input.dataValues.notes,
               createdAt: moment(input.dataValues.createdAt).format("MMMM Do YYYY, h:mm:ss a"),
               symptom: input.dataValues.symptom.dataValues.name
-            }
+            };
             recordData.push(formattedData);
           });
         
@@ -500,4 +545,4 @@ module.exports = function(app){
         });// end .then()
       });// end app.post("/doctorLogin")
       
-};// end module.exports
+  };// end module.exports
