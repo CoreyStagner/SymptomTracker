@@ -29,7 +29,7 @@
           <ul>
             {{#each patients}}
             <li>
-              <a href="/api/patients/{{this.id}}"><button>Record a symptom</button></a> {{this.dataValues.name}}
+              <a href="/patients/{{this.id}}"><button>Record a symptom</button></a> {{this.dataValues.name}}
             </li>
             {{/each}}
           </ul>
@@ -84,7 +84,7 @@
             <ul>
               {{#each doctors}}
               <li>
-                <a href="/api/doctors/{{this.id}}"><button>View Patients</button></a> {{this.dataValues.name}}
+                <a href="/doctors/{{this.id}}"><button>View Patients</button></a> {{this.dataValues.name}}
               </li>
               {{/each}}
             </ul>
