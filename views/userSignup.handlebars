@@ -11,23 +11,23 @@
                 <h4 class="card-title">Patient Sign Up</h4>
             </div>
     <div class="card-body">
-        <form id="userSignup" >
+        <form id="userSignup">
             {{!-- action="/userSignup" method="post"> --}}
             
             <div class="form-group">
                 <label for="userName">Create Username</label>
-                <input name="username" type="ID" class="input-block-level" id="userName" aria-describedby="ID Help" placeholder="Enter a Username">
+                <input name="username" type="ID" class="input-block-level" id="userName" aria-describedby="ID Help" placeholder="Enter a Username" required>
                 <small id="IDHelp" class="form-text text-muted">We'll never share your ID with anyone else.</small>
             </div>
 
             <div class="form-group">
                 <label for="userPassword">Create Password</label>
-                <input name="password" type="password" class="input-block-level" id="userPassword" placeholder="Password">
+                <input name="password" type="password" class="input-block-level" id="userPassword" placeholder="Password" required>
             </div>
 
             <div class="form-group">
                 <label for="userPasswordVerify">Verify Password</label>
-                <input name="password" type="password" class="input-block-level" id="userPasswordVerify" placeholder="Password">
+                <input name="password" type="password" class="input-block-level" id="userPasswordVerify" placeholder="Password" required>
             </div>
 
             <div class="form-group">
