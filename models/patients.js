@@ -7,26 +7,66 @@ module.exports = function (sequelize, DataTypes) {
       autoIncrement: true,
       primaryKey: true
     },// end id
-    name: {
+    first_name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: {
           args: [1, 50],
-          msg: "Please enter your name"
+          msg: "Please enter your first name"
         }// end len
       }//end validate
-    },// end name
-    pass: {
+    },
+    last_name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: {
           args: [1, 50],
-          msg: "Please enter your password"
+          msg: "Please enter your last name"
         }// end len
       }//end validate
-    },// end pass
+    },
+    age: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [1, 3],
+          msg: "Please enter your age"
+        }// end len
+      }//end validate
+    },
+    gender: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [1, 6],
+          msg: "Please enter your gender"
+        }// end len
+      }//end validate
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [1, 20],
+          msg: "Please enter your username"
+        }// end len
+      }//end validate
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [1, 6],
+          msg: "Please enter your gender"
+        }// end len
+      }//end validate
+    },
     salt: {
       type: DataTypes.STRING,
       allowNull: false,
