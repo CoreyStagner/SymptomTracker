@@ -1,7 +1,9 @@
+console.log("Opened file [./models/illnesses.js]");
 
+var models = require('../models');
 
 module.exports = function (sequelize, DataTypes) {
-  var doctors = sequelize.define("doctors", {
+  var illness = sequelize.define("illnesses", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -13,20 +15,14 @@ module.exports = function (sequelize, DataTypes) {
       validate: {
         len: {
           args: [1, 50],
-          msg: "Please enter your name"
+          msg: "Please enter a symptom"
         }// end len
       }//end validate
     },// end name
-    pass: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: {
-          args: [1, 50],
-          msg: "Please enter your password"
-        }// end len
-      }//end validate
-    },// end pass
+    desc: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },// end desc
     createdAt: {
       type: DataTypes.DATE,
       allowNull: true
@@ -35,7 +31,15 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     }// end updatedAt
-  });// end define("doctors")
+  });// end define("illness")
 
-  return doctors;
+    
+
+  illness.associate = function(models) {
+    illness.hasMany(models.diagnoses, {
+     });// end patient.belongsTo()
+   };// end patients.associate()
+
+
+  return illness;
 };// end module.exports
